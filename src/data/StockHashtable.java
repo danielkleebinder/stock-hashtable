@@ -12,9 +12,9 @@ public class StockHashtable {
 	//Calculate index for String keys, USE AT OWN RISK
 	@SuppressWarnings("unused")
 	private int calculateKey(String value) {
-	int result = 100;
-	result = Integer.parseInt(value)*result + 37;
-	return result;
+		int result = 100;
+		result = Integer.parseInt(value)*result + 37;
+		return result;
 	}	
 	
 	//Save certain stock by using its name as key

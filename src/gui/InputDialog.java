@@ -32,8 +32,10 @@ public class InputDialog extends JDialog {
 	private JTextField tfName;
 	private JTextField tfAbb;
 	
-	File file;
+	private File file;
 	private JTextField tfFile;
+	private String name, abbreviation;
+	private SingleStock stock;
 
 	/**
 	 * Launch the application.
@@ -54,6 +56,10 @@ public class InputDialog extends JDialog {
 	public InputDialog() {
 		setTitle("Sieht doch ganz passabel aus");
 		setBounds(100, 100, 450, 300);
+		//Custom
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setAlwaysOnTop(true);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -122,14 +128,17 @@ public class InputDialog extends JDialog {
 							* double open, double high, double low, double close, int volume,
 							* double adjClose
 							*/
-							SingleStock stock = new SingleStock(tfAbb.getText(), tfName.getText(), my7tokens[0],
+							name = tfName.getText();
+							abbreviation = tfAbb.getText();
+							
+							stock = new SingleStock(abbreviation, name, my7tokens[0],
 									Double.parseDouble(my7tokens[1]), Double.parseDouble(my7tokens[2]), Double.parseDouble(my7tokens[3]), Double.parseDouble(my7tokens[4]), Integer.parseInt(my7tokens[5]), 
 									Double.parseDouble(my7tokens[6]));
-							//ohshit, must be given to GUI which has a StockHashtable object!
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
 							e.printStackTrace();
-						}						
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -182,4 +191,15 @@ public class InputDialog extends JDialog {
 		}
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public String getAbb() {
+		return abbreviation;
+	}
+	
+	public SingleStock getStock() {
+		return stock;
+	}
 }

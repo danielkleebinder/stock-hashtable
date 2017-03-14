@@ -3,6 +3,9 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +13,20 @@ import javax.swing.border.EmptyBorder;
 
 import data.SingleStock;
 import data.StockHashtable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HashGUI extends JFrame {
 
@@ -17,6 +34,7 @@ public class HashGUI extends JFrame {
 
 	private StockHashtable sht;
 	InputDialog id = new InputDialog();
+	private JTable table;
 	
 	/**
 	 * Launch the application.
@@ -45,20 +63,80 @@ public class HashGUI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		//Custom code
-		this.setLocationRelativeTo(null);
-		id.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		id.setLocationRelativeTo(this);
-		id.setAlwaysOnTop(true);
-
-		sht = new StockHashtable();
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
+		JPanel pMain = new JPanel();
+		tabbedPane.addTab("Table", null, pMain, null);
+		pMain.setLayout(new BorderLayout(0, 0));
+		
+		table = new JTable();
+		pMain.add(table);
+		
+		JPanel pGraph = new JPanel();
+		tabbedPane.addTab("Graph", null, pGraph, null);
+		
+		JPanel pMenu = new JPanel();
+		pMenu.setBorder(null);
+		contentPane.add(pMenu, BorderLayout.NORTH);
+		pMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JMenuBar menuBar = new JMenuBar();
+		pMenu.add(menuBar);
+		
+		JMenu mnFile = new JMenu(" File ");
+		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
+		mnFile.setMnemonic('f');
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mnFile.add(mntmLoad);
+		
+		JSeparator separator = new JSeparator();
+		mnFile.add(separator);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnFile.add(mntmExit);
+		
+		JMenuItem mntmImport = new JMenuItem("Import New Stock");
+		mntmImport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TESTING
+				addStock(); //TESING
+				//TESTING
+			}
+		});
+		menuBar.add(mntmImport);
+		
+		JMenu mnExport = new JMenu(" Export ");
+		mnExport.setMnemonic('e');
+		mnExport.setHorizontalAlignment(SwingConstants.CENTER);
+		menuBar.add(mnExport);
+		
+		JMenuItem mntmKappa = new JMenuItem("Kappa");
+		mnExport.add(mntmKappa);
+		
+		
+		
+		//Custom code
+		sht = new StockHashtable();
+		this.setLocationRelativeTo(null);
 	}
 	
+	
 	//"map" this to a button
-	public void addStock(String name, SingleStock stock) {
+	public void addStock() {
 		//TODO: run method only if stock is new!
-		//sht.putStockByName(id.getName(), id.getStock());
+		InputDialog indi = new InputDialog();
+		indi.setVisible(true);
+		sht.putStockByName(indi.getName(), indi.getStock());
+		sht.putNameByAbbreviation(indi.getName(), indi.getAbb());
+		indi.dispose();
+		
+		
 	}
 	
 }
