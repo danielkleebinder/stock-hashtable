@@ -9,8 +9,9 @@ public class SingleStock {
 	private double open, high, low, close, adjClose;
 	private int volume;
 	
-	public SingleStock(String abbreviation, String name,
-			String date, double open, double high, double low, double close, int volume, double adjClose)
+	public SingleStock(String abbreviation, String name, String date, 
+			double open, double high, double low, double close, double adjClose,
+			int volume)
 	{
 		this.abbreviation = abbreviation;
 		this.name = name;
@@ -21,4 +22,7 @@ public class SingleStock {
 		this.adjClose = adjClose;
 		this.volume = volume;
 	}
+	
+		
+	
 }
