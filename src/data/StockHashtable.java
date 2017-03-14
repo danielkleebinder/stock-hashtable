@@ -80,13 +80,34 @@ public class StockHashtable {
 		return removeStockByName(getNameForAbbreviation(abb));
 	}
 
-	//Evil?  ¯\(ツ)/¯ 
+	/**
+	 * Returns the single stock for the given name.
+	 *
+	 * @param name Name.
+	 * @return Stock.
+	 */
 	public SingleStock getStockByName(String name) {
-		return stockHT[keyIndex(name)];
+		int index = keyIndex(name);
+
+		while (stockHT[index] != null) {
+			if (name.equals(stockHT[index].getName())) {
+				return stockHT[index];
+			} else {
+				// Use linear probing
+				index = (index + 1) % SIZE;
+			}
+		}
+		return null;
 	}
 
+	/**
+	 * Returns the single stock for the given abbreviation.
+	 *
+	 * @param abb Abbreviation.
+	 * @return Stock.
+	 */
 	public SingleStock getStockByAbbreviation(String abb) {
-		return getStockByName(nameAbbHT[keyIndex(abb)]);
+		return getStockByName(getNameForAbbreviation(abb));
 	}
 
 	/**
