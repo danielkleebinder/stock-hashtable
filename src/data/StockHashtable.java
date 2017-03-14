@@ -17,6 +17,20 @@ public class StockHashtable {
 
 	private int size = 0;
 
+	/**
+	 * Creates a new stock hashtable.
+	 */
+	public StockHashtable() {
+	}
+
+	/**
+	 * Puts the given stock using the given name and abbreviation.
+	 *
+	 * @param name Name.
+	 * @param abb Abbreviation.
+	 * @param st Stock.
+	 * @return True if added successfully, otherwise false.
+	 */
 	public boolean putStock(String name, String abb, SingleStock st) {
 		if (isFull()) {
 			return false;
@@ -25,7 +39,13 @@ public class StockHashtable {
 		return putStockByName(name, st);
 	}
 
-	//Save certain stock by using its name as key
+	/**
+	 * Puts the given stock using the given name.
+	 *
+	 * @param name Name.
+	 * @param st Stock.
+	 * @return True if added successfully, otherwise false.
+	 */
 	@SuppressWarnings("unused")
 	public boolean putStockByName(String name, SingleStock st) {
 		if (isFull()) {
@@ -50,8 +70,26 @@ public class StockHashtable {
 		return true;
 	}
 
-	//Save certain stock by using its abbreviation as key
-	//This way stocks are saved once, although another table for name:abbreviations is required
+	/**
+	 * Puts the given stock using the given abbreviation.
+	 *
+	 * @param abb Abbreviation.
+	 * @param st Stock.
+	 * @return True if added successfully, otherwise false.
+	 */
+	public boolean putStockByAbbreviation(String abb, SingleStock st) {
+		return putStockByName(getNameForAbbreviation(abb), st);
+	}
+
+	//
+	/**
+	 * Save certain stock by using its abbreviation as key. This way stocks are
+	 * saved once, although another table for name:abbreviations is required
+	 *
+	 * @param name Name.
+	 * @param abb Abbreviation.
+	 * @return True if added successfully, otherwise false.
+	 */
 	@SuppressWarnings("unused")
 	public boolean putNameByAbbreviation(String name, String abb) {
 		if (isFull()) {
