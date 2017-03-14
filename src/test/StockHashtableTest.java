@@ -1,6 +1,5 @@
 package test;
 
-import data.SingleStock;
 import data.StockHashtable;
 
 /**
@@ -21,7 +20,7 @@ public class StockHashtableTest {
 		ss2.setAbbreviation("MFT2");
 		
 		SingleStock ss3 = new SingleStock();
-		ss3.setName("Microsoft 2");
-		ss3.setAbbreviation("MFT2");
+		ss3.setName("Microsoft 3");
+		ss3.setAbbreviation("MFT3");
 	}
 }
