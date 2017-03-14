@@ -1,9 +1,8 @@
 package data;
 
 /**
- * This model class stores all stock information.
  *
- * @author Christoph Rippel, Daniel Kleebinder
+ * @author Daniel Kleebinder, Christoph Rippel
  */
 public class SingleStock {
 
