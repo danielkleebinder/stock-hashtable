@@ -3,14 +3,21 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import data.SingleStock;
+import data.StockHashtable;
 
 public class HashGUI extends JFrame {
 
 	private JPanel contentPane;
 
+	private StockHashtable sht;
+	InputDialog id = new InputDialog();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -37,6 +44,21 @@ public class HashGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-	}
+		
+		//Custom code
+		this.setLocationRelativeTo(null);
+		id.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		id.setLocationRelativeTo(this);
+		id.setAlwaysOnTop(true);
 
+		sht = new StockHashtable();
+		
+	}
+	
+	//"map" this to a button
+	public void addStock(String name, SingleStock stock) {
+		//TODO: run method only if stock is new!
+		//sht.putStockByName(id.getName(), id.getStock());
+	}
+	
 }

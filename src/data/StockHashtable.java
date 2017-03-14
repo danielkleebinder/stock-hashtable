@@ -6,7 +6,8 @@ public class StockHashtable {
 
 	private SingleStock[] stockHT = new SingleStock[1000]; //Hashtable: Key = Name, Value = SingleStock
 	private String[] nameAbbHT = new String[1000]; //Hashtable: Key = Abbreviation, Value = Name
-
+	
+	
 	
 	//Calculate index for String keys, USE AT OWN RISK
 	@SuppressWarnings("unused")

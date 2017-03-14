@@ -20,8 +20,13 @@ public class StockCsvParser{
 		String line;
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(f))) {
-			line = br.readLine();
-			tokens = line.split(line, ','); //this line is the cause of a SHITLOAD OF ERRORS
+			line = br.readLine(); //skip first
+			while(line != null) { //while(true) would work
+				line = br.readLine();
+				//System.out.println(line);
+				if(line == null) break; //otherwise .split throws in last iteration
+				tokens = line.split(",");
+			}
 		}
 	}
 	
