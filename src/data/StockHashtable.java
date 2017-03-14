@@ -10,6 +10,15 @@ public class StockHashtable {
 	private final SingleStock[] stockHT = new SingleStock[SIZE]; //Hashtable: Key = Name, Value = SingleStock
 	private final String[] nameAbbHT = new String[SIZE]; //Hashtable: Key = Abbreviation, Value = Name
 
+	
+	//Calculate index for String keys, USE AT OWN RISK
+	@SuppressWarnings("unused")
+	private int calculateKey(String value) {
+	int result = 100;
+	result = Integer.parseInt(value)*result + 37;
+	return result;
+	}	
+	
 	//Save certain stock by using its name as key
 	@SuppressWarnings("unused")
 	public void putStockByName(String name, SingleStock st) {

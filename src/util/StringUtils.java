@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 /**
  * Contains utility methods for strings.
