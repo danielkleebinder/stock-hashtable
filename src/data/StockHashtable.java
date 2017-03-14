@@ -10,12 +10,13 @@ import util.StringUtils;
 public class StockHashtable {
 
 	// Threshold and capacity
-	private final int THRESHOLD = 512;
-	private final int CAPACITY = 1000 + THRESHOLD;
+	private int threshold;
+	private int capacity;
+	private int maxCapacity;
 
 	// Data storage
-	private SingleStock[] stockHT = new SingleStock[CAPACITY];
-	private String[] nameAbbHT = new String[CAPACITY];
+	private SingleStock[] stockHT;
+	private String[] nameAbbHT;
 
 	// Current size
 	private int size = 0;
@@ -24,6 +25,49 @@ public class StockHashtable {
 	 * Creates a new stock hashtable.
 	 */
 	public StockHashtable() {
+		this(1024, 512);
+	}
+
+	/**
+	 * Creates a new hashtable with the given capacity and threshold.
+	 *
+	 * @param capacity Capacity.
+	 * @param threshold Threshold.
+	 */
+	public StockHashtable(int capacity, int threshold) {
+		this.capacity = capacity;
+		this.threshold = threshold;
+		maxCapacity = capacity + threshold;
+
+		stockHT = new SingleStock[maxCapacity];
+		nameAbbHT = new String[maxCapacity];
+	}
+
+	/**
+	 * Returns the threshold.
+	 *
+	 * @return Threshold.
+	 */
+	public int getThreshold() {
+		return threshold;
+	}
+
+	/**
+	 * Returns the capacity.
+	 *
+	 * @return Capacity.
+	 */
+	public int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * Returns the max capacity (capacity + threshold).
+	 *
+	 * @return Max capacity.
+	 */
+	public int getMaxCapacity() {
+		return maxCapacity;
 	}
 
 	/**
@@ -49,7 +93,6 @@ public class StockHashtable {
 	 * @param st Stock.
 	 * @return True if added successfully, otherwise false.
 	 */
-	@SuppressWarnings("unused")
 	public boolean putStockByName(String name, SingleStock st) {
 		if (isFull()) {
 			return false;
@@ -64,7 +107,7 @@ public class StockHashtable {
 			}
 
 			// Use linear probing
-			index = (index + 1) % CAPACITY;
+			index = (index + 1) % maxCapacity;
 		}
 
 		// Add item
@@ -98,7 +141,6 @@ public class StockHashtable {
 	 * @param abb Abbreviation.
 	 * @return True if added successfully, otherwise false.
 	 */
-	@SuppressWarnings("unused")
 	public boolean putNameByAbbreviation(String name, String abb) {
 		if (isFull()) {
 			return false;
@@ -113,7 +155,7 @@ public class StockHashtable {
 			}
 
 			// Use linear probing
-			index = (index + 1) % CAPACITY;
+			index = (index + 1) % maxCapacity;
 		}
 
 		// Add item
@@ -139,12 +181,12 @@ public class StockHashtable {
 				break;
 			} else {
 				// Use linear probing
-				index = (index + 1) % CAPACITY;
+				index = (index + 1) % maxCapacity;
 			}
 		}
 
 		// Move all items after the deleted one
-		for (int j = (index + 1) % CAPACITY; stockHT[j] != null; j = (j + 1) % CAPACITY) {
+		for (int j = (index + 1) % maxCapacity; stockHT[j] != null; j = (j + 1) % maxCapacity) {
 			buffer = stockHT[j];
 			stockHT[j] = null;
 			putStockByName(name, buffer);
@@ -179,7 +221,7 @@ public class StockHashtable {
 				return stockHT[index];
 			} else {
 				// Use linear probing
-				index = (index + 1) % CAPACITY;
+				index = (index + 1) % maxCapacity;
 			}
 		}
 		return null;
@@ -196,13 +238,33 @@ public class StockHashtable {
 	}
 
 	/**
+	 * Returns true if the table contains the stock for the given name.
+	 *
+	 * @param name Name.
+	 * @return True if its in the table, otherwise false.
+	 */
+	public boolean containsStockByName(String name) {
+		return getStockByName(name) != null;
+	}
+
+	/**
+	 * Returns true if the table contains the stock for the given abbreviation.
+	 *
+	 * @param abb Abbreviation.
+	 * @return True if its in the table, otherwise false.
+	 */
+	public boolean containsStockByAbbreviation(String abb) {
+		return getStockByAbbreviation(abb) != null;
+	}
+
+	/**
 	 * Returns the global index of the given string.
 	 *
 	 * @param str String.
 	 * @return Hash table index.
 	 */
 	private int keyIndex(String str) {
-		return StringUtils.hashCode(str) % CAPACITY;
+		return StringUtils.hashCode(str) % maxCapacity;
 	}
 
 	/**
@@ -223,8 +285,8 @@ public class StockHashtable {
 	 * Clears and deletes all entries.
 	 */
 	public void clear() {
-		stockHT = new SingleStock[CAPACITY];
-		nameAbbHT = new String[CAPACITY];
+		stockHT = new SingleStock[maxCapacity];
+		nameAbbHT = new String[maxCapacity];
 		size = 0;
 	}
 
@@ -234,7 +296,7 @@ public class StockHashtable {
 	 * @return True if full, otherwise false.
 	 */
 	public boolean isFull() {
-		return size >= CAPACITY;
+		return size >= maxCapacity;
 	}
 
 	/**

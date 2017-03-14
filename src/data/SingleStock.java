@@ -156,6 +156,8 @@ public class SingleStock {
 
 	@Override
 	public String toString() {
-		return "SingleStock{" + "abbreviation=" + abbreviation + ", name=" + name + '}';
+		StringBuilder result = new StringBuilder();
+		result.append("SingleStock{abbreviation=").append(abbreviation).append(", name=").append(name).append("}");
+		return result.toString();
 	}
 }
