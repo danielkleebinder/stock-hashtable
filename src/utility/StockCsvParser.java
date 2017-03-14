@@ -8,20 +8,24 @@ import java.util.StringTokenizer;
 public class StockCsvParser{
 
 	private File f;
+	private String[] tokens;
 	
-	public StockCsvParser(File f) {
+	public StockCsvParser(File f) throws Exception {
 		this.f = f;
+		parseData();
 	}
 	
 	//Input: Date,Open,High,Low,Close,Volume,Adj Close
-	public String[] parseData() throws Exception{
+	private void parseData() throws Exception{
 		String line;
-		String[] tokens;
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(f))) {
 			line = br.readLine();
-			tokens = line.split(",");
+			tokens = line.split(line, ','); //this line is the cause of a SHITLOAD OF ERRORS
 		}
+	}
+	
+	public String[] getTokens() {
 		return tokens;
-	}	
+	}
 }

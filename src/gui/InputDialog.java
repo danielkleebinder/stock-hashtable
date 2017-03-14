@@ -5,20 +5,35 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import data.SingleStock;
+import data.StockHashtable;
+import utility.StockCsvParser;
+
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
 
 public class InputDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfName;
 	private JTextField tfAbb;
+	
+	File file;
+	private JTextField tfFile;
 
 	/**
 	 * Launch the application.
@@ -82,36 +97,89 @@ public class InputDialog extends JDialog {
 			}
 		}
 		{
-			JButton btnBrowse = new JButton("Browse");
-			contentPanel.add(btnBrowse, BorderLayout.SOUTH);
-		}
-		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						//ON CONFIRMATION
+						/*TODO
+						 * Step 1: take name and abbreviation (user input)
+						 * Step 2: parse csv data (find file with JFileChooser)
+						 * Step 3: send file path to parser (has to be platform independent!?)
+						 * Step 4: make new SingleStock
+						 * Step 5: send it into the XXXStockHashTableXXX -> GUI instead
+						*/
+						StockCsvParser scp = null;
+						String[] my7tokens;
+						
+						try {
+							scp = new StockCsvParser(file);
+							my7tokens = scp.getTokens();
+							/*String abbreviation, String name, String date, 
+							* double open, double high, double low, double close, int volume,
+							* double adjClose
+							*/
+							SingleStock stock = new SingleStock(tfAbb.getText(), tfName.getText(), my7tokens[0],
+									Double.parseDouble(my7tokens[1]), Double.parseDouble(my7tokens[2]), Double.parseDouble(my7tokens[3]), Double.parseDouble(my7tokens[4]), Integer.parseInt(my7tokens[5]), 
+									Double.parseDouble(my7tokens[6]));
+							//ohshit, must be given to GUI which has a StockHashtable object!
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
+							e.printStackTrace();
+						}						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						System.exit(0);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
+		{
+			{
+				JPanel pFileBrowser = new JPanel();
+				contentPanel.add(pFileBrowser, BorderLayout.SOUTH);
+				pFileBrowser.setLayout(new BorderLayout(5, 0));
+				JButton btBrowse = new JButton("Browse");
+				pFileBrowser.add(btBrowse, BorderLayout.EAST);
+				{
+					tfFile = new JTextField();
+					tfFile.setEditable(false);
+					pFileBrowser.add(tfFile, BorderLayout.CENTER);
+					tfFile.setColumns(10);
+				}
+				btBrowse.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						final JFileChooser chooser = new JFileChooser();
+						try {
+							if(chooser.showOpenDialog(InputDialog.this) == JFileChooser.APPROVE_OPTION) {
+								chooser.setFileFilter(new FileNameExtensionFilter("CSV File","csv"));
+							}
+							file = chooser.getSelectedFile();
+							tfFile.setText(file.getPath());
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(InputDialog.this, "Try again, I believe you can do it!",
+									"Wrong file extension", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					}
+				});
+			}
+		}
 	}
 	
-	private void sendInputDataToHashStocks() {
-		/*TODO
-		 * Step 1: take name and abbreviation (user input)
-		 * Step 2: parse csv data (find file with JFileChooser, try-with-resources!)
-		 * Step 3: send file path to parser (has to be platform independent!?)
-		 * Step 4: make new SingleStock
-		 * Step 5: send it into the StockHashTable
-		*/
-	}
-	
-
 }
