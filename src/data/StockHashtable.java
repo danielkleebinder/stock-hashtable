@@ -1,6 +1,6 @@
 package data;
 
-import utils.StringUtils;
+import util.StringUtils;
 
 /**
  * Main stock hashtable class.
@@ -9,12 +9,15 @@ import utils.StringUtils;
  */
 public class StockHashtable {
 
+	// Threshold and capacity
 	private final int THRESHOLD = 512;
 	private final int CAPACITY = 1000 + THRESHOLD;
 
-	private final SingleStock[] stockHT = new SingleStock[CAPACITY];
-	private final String[] nameAbbHT = new String[CAPACITY];
+	// Data storage
+	private SingleStock[] stockHT = new SingleStock[CAPACITY];
+	private String[] nameAbbHT = new String[CAPACITY];
 
+	// Current size
 	private int size = 0;
 
 	/**
@@ -66,6 +69,12 @@ public class StockHashtable {
 
 		// Add item
 		stockHT[index] = st;
+
+		// Add abbreviation if one exists
+		if (st.getAbbreviation() != null) {
+			putNameByAbbreviation(name, st.getAbbreviation());
+		}
+
 		size++;
 		return true;
 	}
@@ -81,7 +90,6 @@ public class StockHashtable {
 		return putStockByName(getNameForAbbreviation(abb), st);
 	}
 
-	//
 	/**
 	 * Save certain stock by using its abbreviation as key. This way stocks are
 	 * saved once, although another table for name:abbreviations is required
@@ -110,7 +118,6 @@ public class StockHashtable {
 
 		// Add item
 		nameAbbHT[index] = name;
-		size++;
 		return true;
 	}
 
@@ -142,6 +149,8 @@ public class StockHashtable {
 			stockHT[j] = null;
 			putStockByName(name, buffer);
 		}
+
+		size--;
 
 		return result;
 	}
@@ -203,7 +212,20 @@ public class StockHashtable {
 	 * @return Name.
 	 */
 	public String getNameForAbbreviation(String abb) {
-		return nameAbbHT[keyIndex(abb)];
+		String result = nameAbbHT[keyIndex(abb)];
+		if (result == null) {
+			throw new NullPointerException("No corresponding name for " + abb);
+		}
+		return result;
+	}
+
+	/**
+	 * Clears and deletes all entries.
+	 */
+	public void clear() {
+		stockHT = new SingleStock[CAPACITY];
+		nameAbbHT = new String[CAPACITY];
+		size = 0;
 	}
 
 	/**
@@ -222,5 +244,14 @@ public class StockHashtable {
 	 */
 	public boolean isEmpty() {
 		return size <= 0;
+	}
+
+	/**
+	 * Returns the current size.
+	 *
+	 * @return Size.
+	 */
+	public int getSize() {
+		return size;
 	}
 }
