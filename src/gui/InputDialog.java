@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.SingleStock;
 import data.StockHashtable;
-import utility.StockCsvParser;
+import util.StockCsvParser;
 
 import java.awt.event.ActionListener;
 import java.io.File;

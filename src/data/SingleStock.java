@@ -19,16 +19,16 @@ public class SingleStock {
 	}
 
 	public SingleStock(String abbreviation, String name, String date,
-			double open, double high, double low, double close, double adjClose,
-			int volume) {
+			double open, double high, double low, double close, int volume,
+			double adjClose) {
 		this.abbreviation = abbreviation;
 		this.name = name;
 		this.date = date;
 		this.open = open;
 		this.high = high;
 		this.low = low;
-		this.adjClose = adjClose;
 		this.volume = volume;
+		this.adjClose = adjClose;
 	}
 
 	public void setAbbreviation(String abbreviation) {
