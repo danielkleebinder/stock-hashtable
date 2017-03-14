@@ -53,7 +53,13 @@ public class InputDialog extends JDialog {
 	}
 	
 	private void sendInputDataToHashStocks() {
-		//TODO take name and abbreviation (user input) and call the related method in class HashStocks
+		/*TODO
+		 * Step 1: take name and abbreviation (user input)
+		 * Step 2: parse csv data (find file with JFileChooser, try-with-resources!)
+		 * Step 3: send file path to parser (has to be platform independent!?)
+		 * Step 4: make new SingleStock
+		 * Step 5: send it into the StockHashTable
+		*/
 	}
 
 }
