@@ -10,32 +10,70 @@ import utils.StringUtils;
 public class StockHashtable {
 
 	private final int THRESHOLD = 512;
-	private final int SIZE = 1000 + THRESHOLD;
+	private final int CAPACITY = 1000 + THRESHOLD;
 
-	private final SingleStock[] stockHT = new SingleStock[SIZE];
-	private final String[] nameAbbHT = new String[SIZE];
+	private final SingleStock[] stockHT = new SingleStock[CAPACITY];
+	private final String[] nameAbbHT = new String[CAPACITY];
+
+	private int size = 0;
+
+	public boolean putStock(String name, String abb, SingleStock st) {
+		if (isFull()) {
+			return false;
+		}
+		putNameByAbbreviation(name, abb);
+		return putStockByName(name, st);
+	}
 
 	//Save certain stock by using its name as key
 	@SuppressWarnings("unused")
-	public void putStockByName(String name, SingleStock st) {
-		int index = keyIndex(name);
-		if (stockHT[index] == null) {
-			stockHT[index] = st;
-		} else {
-			//TODO: collision handling
+	public boolean putStockByName(String name, SingleStock st) {
+		if (isFull()) {
+			return false;
 		}
+
+		int index = keyIndex(name);
+
+		while (stockHT[index] != null) {
+			// Check if the entry is already in the hashtable
+			if (name.equals(stockHT[index].getName())) {
+				return false;
+			}
+
+			// Use linear probing
+			index = (index + 1) % CAPACITY;
+		}
+
+		// Add item
+		stockHT[index] = st;
+		size++;
+		return true;
 	}
 
-	//Save certain stock by using its abbreviation as key, calls putStockByName()
+	//Save certain stock by using its abbreviation as key
 	//This way stocks are saved once, although another table for name:abbreviations is required
 	@SuppressWarnings("unused")
-	public void putNameByAbbreviation(String name, String abb) {
-		int index = keyIndex(name);
-		if (nameAbbHT[index] == null) {
-			nameAbbHT[index] = abb;
-		} else {
-			//TODO: collision handling
+	public boolean putNameByAbbreviation(String name, String abb) {
+		if (isFull()) {
+			return false;
 		}
+
+		int index = keyIndex(abb);
+
+		while (nameAbbHT[index] != null) {
+			// Check if the entry is already in the hashtable
+			if (name.equals(nameAbbHT[index])) {
+				return false;
+			}
+
+			// Use linear probing
+			index = (index + 1) % CAPACITY;
+		}
+
+		// Add item
+		nameAbbHT[index] = name;
+		size++;
+		return true;
 	}
 
 	/**
@@ -56,12 +94,12 @@ public class StockHashtable {
 				break;
 			} else {
 				// Use linear probing
-				index = (index + 1) % SIZE;
+				index = (index + 1) % CAPACITY;
 			}
 		}
 
 		// Move all items after the deleted one
-		for (int j = (index + 1) % SIZE; stockHT[j] != null; j = (j + 1) % SIZE) {
+		for (int j = (index + 1) % CAPACITY; stockHT[j] != null; j = (j + 1) % CAPACITY) {
 			buffer = stockHT[j];
 			stockHT[j] = null;
 			putStockByName(name, buffer);
@@ -94,7 +132,7 @@ public class StockHashtable {
 				return stockHT[index];
 			} else {
 				// Use linear probing
-				index = (index + 1) % SIZE;
+				index = (index + 1) % CAPACITY;
 			}
 		}
 		return null;
@@ -117,7 +155,7 @@ public class StockHashtable {
 	 * @return Hash table index.
 	 */
 	private int keyIndex(String str) {
-		return StringUtils.hashCode(str) % SIZE;
+		return StringUtils.hashCode(str) % CAPACITY;
 	}
 
 	/**
@@ -128,5 +166,23 @@ public class StockHashtable {
 	 */
 	public String getNameForAbbreviation(String abb) {
 		return nameAbbHT[keyIndex(abb)];
+	}
+
+	/**
+	 * Returns if the hashtable is full.
+	 *
+	 * @return True if full, otherwise false.
+	 */
+	public boolean isFull() {
+		return size >= CAPACITY;
+	}
+
+	/**
+	 * Returns if the hashtable is empty.
+	 *
+	 * @return True if empty, otherwise false.
+	 */
+	public boolean isEmpty() {
+		return size <= 0;
 	}
 }
