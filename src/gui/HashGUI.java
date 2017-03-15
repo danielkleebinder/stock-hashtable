@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import data.SingleStock;
 import data.StockHashtable;
@@ -32,9 +33,9 @@ public class HashGUI extends JFrame {
 
 	private JPanel contentPane;
 
-	private StockHashtable sht;
-	InputDialog id = new InputDialog();
-	private JTable table;
+	private StockHashtable sht; //Source for table data
+	InputDialog id = new InputDialog(); //source for stockhashtable
+	DefaultTableModel dtm; //used for displaying stock
 	
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class HashGUI extends JFrame {
 	 */
 	public HashGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 453);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -66,12 +67,20 @@ public class HashGUI extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel pMain = new JPanel();
-		tabbedPane.addTab("Table", null, pMain, null);
-		pMain.setLayout(new BorderLayout(0, 0));
+		//Table
+		JTable table = new JTable();
+		table.setEnabled(false);
+		JScrollPane scrollPane = new JScrollPane(table);
+		tabbedPane.addTab("Table", null, scrollPane, null);
+		table.setFillsViewportHeight(true);
+		//String abbreviation, String name, String date,
+		//double open, double high, double low, double close, int volume,
+		//double adjClose
+		dtm = new DefaultTableModel(30, 7);
+		table.setModel(dtm);
+		Object[] columnIdentifiers = {"Date", "Open", "High", "Low", "Close", "Volume", "adjClose"};
+		dtm.setColumnIdentifiers(columnIdentifiers);		
 		
-		table = new JTable();
-		pMain.add(table);
 		
 		JPanel pGraph = new JPanel();
 		tabbedPane.addTab("Graph", null, pGraph, null);
@@ -109,9 +118,11 @@ public class HashGUI extends JFrame {
 		JMenuItem mntmImport = new JMenuItem("Import New Stock");
 		mntmImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TESTING
-				addStock(); //TESING
-				//TESTING
+				InputDialog indi = new InputDialog();
+				indi.setModal(true);
+				indi.setVisible(true);
+				//System.out.println(indi.getName());
+				sht.putStockByName(indi.getName(), indi.getStock());
 			}
 		});
 		menuBar.add(mntmImport);
@@ -131,20 +142,5 @@ public class HashGUI extends JFrame {
 		this.setLocationRelativeTo(null);
 	}
 	
-	
-	//"map" this to a button
-	public void addStock() {
-		//TODO: run method only if stock is new!
-		//System.out.println("testing actionlistener");
-		InputDialog indi = new InputDialog();
-		indi.setModal(true);
-		indi.setVisible(true);
-		//System.out.println(indi.getName());
-		sht.putStockByName(indi.getName(), indi.getStock());
 		
-		
-		
-		
-	}
-	
 }
