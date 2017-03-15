@@ -134,9 +134,10 @@ public class InputDialog extends JDialog {
 							stock = new SingleStock(abbreviation, name, my7tokens[0],
 									Double.parseDouble(my7tokens[1]), Double.parseDouble(my7tokens[2]), Double.parseDouble(my7tokens[3]), Double.parseDouble(my7tokens[4]), Integer.parseInt(my7tokens[5]), 
 									Double.parseDouble(my7tokens[6]));
+							InputDialog.this.dispose();
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
-							e.printStackTrace();
+							//e.printStackTrace();
 						}
 						
 					}

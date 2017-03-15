@@ -99,6 +99,11 @@ public class HashGUI extends JFrame {
 		mnFile.add(separator);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		mnFile.add(mntmExit);
 		
 		JMenuItem mntmImport = new JMenuItem("Import New Stock");
@@ -130,11 +135,14 @@ public class HashGUI extends JFrame {
 	//"map" this to a button
 	public void addStock() {
 		//TODO: run method only if stock is new!
+		//System.out.println("testing actionlistener");
 		InputDialog indi = new InputDialog();
+		indi.setModal(true);
 		indi.setVisible(true);
+		//System.out.println(indi.getName());
 		sht.putStockByName(indi.getName(), indi.getStock());
-		sht.putNameByAbbreviation(indi.getName(), indi.getAbb());
-		indi.dispose();
+		
+		
 		
 		
 	}
