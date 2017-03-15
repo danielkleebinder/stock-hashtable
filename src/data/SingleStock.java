@@ -11,16 +11,16 @@ public class SingleStock {
 
 	private String abbreviation, name;
 
-	private String date;
-	private double open, high, low, close, adjClose;
-	private int volume;
+	private String[] date;
+	private double[] open, high, low, close, adjClose;
+	private int[] volume;
 
 	public SingleStock() {
 	}
 
-	public SingleStock(String abbreviation, String name, String date,
-			double open, double high, double low, double close, int volume,
-			double adjClose) {
+	public SingleStock(String abbreviation, String name, String[] date,
+			double[] open, double[] high, double[] low, double[] close, int[] volume,
+			double[] adjClose) {
 		this.abbreviation = abbreviation;
 		this.name = name;
 		this.date = date;
@@ -47,62 +47,63 @@ public class SingleStock {
 		return name;
 	}
 
-	public void setDate(String date) {
+	public void setDate(String[] date) {
 		this.date = date;
 	}
 
-	public String getDate() {
+	public String[] getDate() {
 		return date;
 	}
 
-	public void setOpen(double open) {
+	public void setOpen(double[] open) {
 		this.open = open;
 	}
 
-	public double getOpen() {
+	public double[] getOpen() {
 		return open;
 	}
 
-	public void setHigh(double high) {
+	public void setHigh(double[] high) {
 		this.high = high;
 	}
 
-	public double getHigh() {
+	public double[] getHigh() {
 		return high;
 	}
 
-	public void setLow(double low) {
+	public void setLow(double[] low) {
 		this.low = low;
 	}
 
-	public double getLow() {
+	public double[] getLow() {
 		return low;
 	}
 
-	public void setClose(double close) {
+	public void setClose(double[] close) {
 		this.close = close;
 	}
 
-	public double getClose() {
+	public double[] getClose() {
 		return close;
 	}
 
-	public void setAdjClose(double adjClose) {
+	public void setAdjClose(double[] adjClose) {
 		this.adjClose = adjClose;
 	}
 
-	public double getAdjClose() {
+	public double[] getAdjClose() {
 		return adjClose;
 	}
 
-	public void setVolume(int volume) {
+	public void setVolume(int[] volume) {
 		this.volume = volume;
 	}
 
-	public int getVolume() {
+	public int[] getVolume() {
 		return volume;
 	}
 
+	/*
 	@Override
 	public int hashCode() {
 		int hash = 3;
@@ -116,8 +117,9 @@ public class SingleStock {
 		hash = 37 * hash + (int) (Double.doubleToLongBits(this.adjClose) ^ (Double.doubleToLongBits(this.adjClose) >>> 32));
 		hash = 37 * hash + this.volume;
 		return hash;
-	}
-
+	}*/
+	
+	/*
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -153,7 +155,8 @@ public class SingleStock {
 		}
 		return this.volume == other.volume;
 	}
-
+	 */
+	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
