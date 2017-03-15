@@ -37,6 +37,7 @@ public class HashGUI extends JFrame {
 	InputDialog id = new InputDialog(); //source for stockhashtable
 	DefaultTableModel dtm; //used for displaying stock
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,20 +68,22 @@ public class HashGUI extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
-		//Table
+		//Stock Data stored here____________________________________________________________________________
+		sht = new StockHashtable();
+		this.setLocationRelativeTo(null);
+		
+		//Table custom code
 		JTable table = new JTable();
 		table.setEnabled(false);
 		JScrollPane scrollPane = new JScrollPane(table);
 		tabbedPane.addTab("Table", null, scrollPane, null);
 		table.setFillsViewportHeight(true);
-		//String abbreviation, String name, String date,
-		//double open, double high, double low, double close, int volume,
-		//double adjClose
+		
 		dtm = new DefaultTableModel(30, 7);
 		table.setModel(dtm);
 		Object[] columnIdentifiers = {"Date", "Open", "High", "Low", "Close", "Volume", "adjClose"};
-		dtm.setColumnIdentifiers(columnIdentifiers);		
-		
+		dtm.setColumnIdentifiers(columnIdentifiers);
+		//_________________________________________________________________________________________________
 		
 		JPanel pGraph = new JPanel();
 		tabbedPane.addTab("Graph", null, pGraph, null);
@@ -118,11 +121,17 @@ public class HashGUI extends JFrame {
 		JMenuItem mntmImport = new JMenuItem("Import New Stock");
 		mntmImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Imprt new stock_________________________________________________________________
 				InputDialog indi = new InputDialog();
 				indi.setModal(true);
 				indi.setVisible(true);
 				//System.out.println(indi.getName());
 				sht.putStockByName(indi.getName(), indi.getStock());
+				
+				SingleStock si = indi.getStock();
+				//Object[] stockInsert = {si.getDate(),{
+				//dtm.insertRow(row, );
+				//________________________________________________________________________________
 			}
 		});
 		menuBar.add(mntmImport);
@@ -134,12 +143,6 @@ public class HashGUI extends JFrame {
 		
 		JMenuItem mntmKappa = new JMenuItem("Kappa");
 		mnExport.add(mntmKappa);
-		
-		
-		
-		//Custom code
-		sht = new StockHashtable();
-		this.setLocationRelativeTo(null);
 	}
 	
 		

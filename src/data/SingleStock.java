@@ -12,14 +12,13 @@ public class SingleStock {
 	private String abbreviation, name;
 
 	private String[] date;
-	private double[] open, high, low, close, adjClose;
-	private int[] volume;
+	private double[] open, high, low, close, adjClose, volume;
 
 	public SingleStock() {
 	}
 
 	public SingleStock(String abbreviation, String name, String[] date,
-			double[] open, double[] high, double[] low, double[] close, int[] volume,
+			double[] open, double[] high, double[] low, double[] close, double[] volume,
 			double[] adjClose) {
 		this.abbreviation = abbreviation;
 		this.name = name;
@@ -95,11 +94,11 @@ public class SingleStock {
 		return adjClose;
 	}
 
-	public void setVolume(int[] volume) {
+	public void setVolume(double[] volume) {
 		this.volume = volume;
 	}
 
-	public int[] getVolume() {
+	public double[] getVolume() {
 		return volume;
 	}
 

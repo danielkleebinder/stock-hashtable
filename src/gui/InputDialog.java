@@ -110,36 +110,7 @@ public class InputDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						//ON CONFIRMATION
-						/*TODO
-						 * Step 1: take name and abbreviation (user input)
-						 * Step 2: parse csv data (find file with JFileChooser)
-						 * Step 3: send file path to parser (has to be platform independent!?)
-						 * Step 4: make new SingleStock
-						 * Step 5: send it into the XXXStockHashTableXXX -> GUI instead
-						*/
-						StockCsvParser scp = null;
-						String[] my7tokens;
-						
-						try {
-							scp = new StockCsvParser(file);
-							my7tokens = scp.getTokens();
-							/*String abbreviation, String name, String date, 
-							* double open, double high, double low, double close, int volume,
-							* double adjClose
-							*/
-							name = tfName.getText();
-							abbreviation = tfAbb.getText();
-							
-							stock = new SingleStock(abbreviation, name, my7tokens[0],
-									Double.parseDouble(my7tokens[1]), Double.parseDouble(my7tokens[2]), Double.parseDouble(my7tokens[3]), Double.parseDouble(my7tokens[4]), Integer.parseInt(my7tokens[5]), 
-									Double.parseDouble(my7tokens[6]));
-							InputDialog.this.dispose();
-						} catch (Exception e) {
-							JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
-							//e.printStackTrace();
-						}
-						
+						onConfirm();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -172,7 +143,7 @@ public class InputDialog extends JDialog {
 				}
 				btBrowse.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						//Filechooser_____________________________________________________________________________________
 						final JFileChooser chooser = new JFileChooser();
 						try {
 							if(chooser.showOpenDialog(InputDialog.this) == JFileChooser.APPROVE_OPTION) {
@@ -185,13 +156,48 @@ public class InputDialog extends JDialog {
 							JOptionPane.showMessageDialog(InputDialog.this, "Try again, I believe you can do it!",
 									"Wrong file extension", JOptionPane.ERROR_MESSAGE);
 						}
-						
+						//_______________________________________________________________________________________________
 					}
 				});
 			}
 		}
 	}
 	
+	private void onConfirm() {
+		/*TODO
+		 * Step 1: take name and abbreviation (user input)
+		 * Step 2: parse csv data (find file with JFileChooser)
+		 * Step 3: send file path to parser (has to be platform independent!?)
+		 * Step 4: make new SingleStock
+		 * Step 5: send it into the XXXStockHashTableXXX -> GUI instead
+		*/
+		StockCsvParser scp = null;
+		String[][] my7tokens;
+		
+		try {
+			scp = new StockCsvParser(file);
+			my7tokens = scp.getTokens();
+			/*String abbreviation, String name, String date, 
+			* double open, double high, double low, double close, int volume,
+			* double adjClose
+			*/
+			name = tfName.getText();
+			abbreviation = tfAbb.getText();
+			
+			
+			/*
+			stock = new SingleStock(abbreviation, name, my7tokens[0],
+					my7tokens[1], my7tokens[2], my7tokens[3],
+					my7tokens[4], my7tokens[5], 
+					my7tokens[6]);*/
+			InputDialog.this.dispose();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
+			//e.printStackTrace();
+		}
+	}
+	
+	//Getter
 	public String getName() {
 		return name;
 	}
