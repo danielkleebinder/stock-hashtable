@@ -12,16 +12,12 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.SingleStock;
-import data.StockHashtable;
 import util.StockBuilder;
-import util.StockCsvParser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -32,10 +28,11 @@ public class InputDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfName;
 	private JTextField tfAbb;
+	private JTextField tfFile;
 	
 	private File file;
-	private JTextField tfFile;
 	private String name, abbreviation;
+	private StockBuilder sb;
 	private SingleStock stock;
 
 	/**
@@ -165,26 +162,9 @@ public class InputDialog extends JDialog {
 	}
 	
 	private void onConfirm() {
-		/*TODO
-		 * Step 1: take name and abbreviation (user input)
-		 * Step 2: parse csv data (find file with JFileChooser)
-		 * Step 3: send file path to parser (has to be platform independent!?)
-		 * Step 4: make new SingleStock
-		 * Step 5: send it into the XXXStockHashTableXXX -> GUI instead
-		*/
-		StockBuilder scp = null;
-		String[][] my7tokens;
-		
 		try {
-			scp = new StockBuilder(new File("C:\\Users\\Chris-Surface\\Desktop\\table.csv")); //replace with file after testing
-			//my7tokens = scp.getTokens();
-			//name = tfName.getText();
-			//abbreviation = tfAbb.getText();
-			/*
-			stock = new SingleStock(abbreviation, name, my7tokens[0],
-					my7tokens[1], my7tokens[2], my7tokens[3],
-					my7tokens[4], my7tokens[5], 
-					my7tokens[6]);*/
+			sb = new StockBuilder(new File("C:\\Users\\Chris-Surface\\Desktop\\table.csv")); //replace with file after testing
+			stock = new SingleStock(tfName.getText(), tfAbb.getText(), sb.getFilledStockDataset());
 			InputDialog.this.dispose();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);

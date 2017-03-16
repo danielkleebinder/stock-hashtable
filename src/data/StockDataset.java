@@ -3,7 +3,7 @@ package data;
 import java.util.Objects;
 
 /**
- * Single stock model class.
+ * Model of a single line in the input file.
  *
  * @author Daniel Kleebinder, Christoph Rippel
  */

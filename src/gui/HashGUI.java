@@ -3,10 +3,6 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.ImageIcon;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,12 +10,9 @@ import javax.swing.table.DefaultTableModel;
 
 import data.SingleStock;
 import data.StockHashtable;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;

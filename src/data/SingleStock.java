@@ -1,33 +1,23 @@
 package data;
 
-import java.util.Objects;
-
 /**
  * Single stock model class.
  *
  * @author Daniel Kleebinder, Christoph Rippel
  */
+
 public class SingleStock {
 
 	private String abbreviation, name;
-
-	private String[] date;
-	private double[] open, high, low, close, adjClose, volume;
+	private StockDataset[] stockdata;
 
 	public SingleStock() {
 	}
 
-	public SingleStock(String abbreviation, String name, String[] date,
-			double[] open, double[] high, double[] low, double[] close, double[] volume,
-			double[] adjClose) {
+	public SingleStock(String abbreviation, String name, StockDataset[] stockdata) {
 		this.abbreviation = abbreviation;
 		this.name = name;
-		this.date = date;
-		this.open = open;
-		this.high = high;
-		this.low = low;
-		this.volume = volume;
-		this.adjClose = adjClose;
+		this.stockdata = stockdata;
 	}
 
 	public void setAbbreviation(String abbreviation) {
@@ -46,60 +36,12 @@ public class SingleStock {
 		return name;
 	}
 
-	public void setDate(String[] date) {
-		this.date = date;
+	public void setStockdataset(StockDataset[] stockdata) {
+		this.stockdata = stockdata;
 	}
-
-	public String[] getDate() {
-		return date;
-	}
-
-	public void setOpen(double[] open) {
-		this.open = open;
-	}
-
-	public double[] getOpen() {
-		return open;
-	}
-
-	public void setHigh(double[] high) {
-		this.high = high;
-	}
-
-	public double[] getHigh() {
-		return high;
-	}
-
-	public void setLow(double[] low) {
-		this.low = low;
-	}
-
-	public double[] getLow() {
-		return low;
-	}
-
-	public void setClose(double[] close) {
-		this.close = close;
-	}
-
-	public double[] getClose() {
-		return close;
-	}
-
-	public void setAdjClose(double[] adjClose) {
-		this.adjClose = adjClose;
-	}
-
-	public double[] getAdjClose() {
-		return adjClose;
-	}
-
-	public void setVolume(double[] volume) {
-		this.volume = volume;
-	}
-
-	public double[] getVolume() {
-		return volume;
+	
+	public StockDataset[] getStockdataset() {
+		return stockdata;
 	}
 
 	/*
