@@ -106,8 +106,8 @@ public class StockHashtable {
 				return false;
 			}
 
-			// Use linear probing
-			index = (index + 1) % maxCapacity;
+			// Use squared probing
+			index = squaredProbing(index);
 		}
 
 		// Add item
@@ -154,8 +154,8 @@ public class StockHashtable {
 				return false;
 			}
 
-			// Use linear probing
-			index = (index + 1) % maxCapacity;
+			// Use squared probing
+			index = squaredProbing(index);
 		}
 
 		// Add item
@@ -180,8 +180,8 @@ public class StockHashtable {
 			if (name.equals(result.getName())) {
 				break;
 			} else {
-				// Use linear probing
-				index = (index + 1) % maxCapacity;
+				// Use squared probing
+				index = squaredProbing(index);
 			}
 		}
 
@@ -220,8 +220,8 @@ public class StockHashtable {
 			if (name.equals(stockHT[index].getName())) {
 				return stockHT[index];
 			} else {
-				// Use linear probing
-				index = (index + 1) % maxCapacity;
+				// Use squared probing
+				index = squaredProbing(index);
 			}
 		}
 		return null;
@@ -315,5 +315,13 @@ public class StockHashtable {
 	 */
 	public int getSize() {
 		return size;
+	}
+
+	private int linearProbing(int index) {
+		return (index + 1) % maxCapacity;
+	}
+
+	private int squaredProbing(int index) {
+		return ((index + 1) * (index + 1)) % maxCapacity;
 	}
 }

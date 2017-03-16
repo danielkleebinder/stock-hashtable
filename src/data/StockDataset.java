@@ -1,7 +1,5 @@
 package data;
 
-import java.util.Objects;
-
 /**
  * Model of a single line in the input file.
  *
@@ -19,6 +17,7 @@ public class StockDataset {
 		this.open = open;
 		this.high = high;
 		this.low = low;
+		this.close = close;
 		this.volume = volume;
 		this.adjClose = adjClose;
 	}

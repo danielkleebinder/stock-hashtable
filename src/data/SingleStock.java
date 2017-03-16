@@ -36,67 +36,13 @@ public class SingleStock {
 		return name;
 	}
 
-	public void setStockdataset(StockDataset[] stockdata) {
+	public void setStockDataset(StockDataset[] stockdata) {
 		this.stockdata = stockdata;
 	}
 	
-	public StockDataset[] getStockdataset() {
+	public StockDataset[] getStockDataset() {
 		return stockdata;
 	}
-
-	/*
-	@Override
-	public int hashCode() {
-		int hash = 3;
-		hash = 37 * hash + Objects.hashCode(this.abbreviation);
-		hash = 37 * hash + Objects.hashCode(this.name);
-		hash = 37 * hash + Objects.hashCode(this.date);
-		hash = 37 * hash + (int) (Double.doubleToLongBits(this.open) ^ (Double.doubleToLongBits(this.open) >>> 32));
-		hash = 37 * hash + (int) (Double.doubleToLongBits(this.high) ^ (Double.doubleToLongBits(this.high) >>> 32));
-		hash = 37 * hash + (int) (Double.doubleToLongBits(this.low) ^ (Double.doubleToLongBits(this.low) >>> 32));
-		hash = 37 * hash + (int) (Double.doubleToLongBits(this.close) ^ (Double.doubleToLongBits(this.close) >>> 32));
-		hash = 37 * hash + (int) (Double.doubleToLongBits(this.adjClose) ^ (Double.doubleToLongBits(this.adjClose) >>> 32));
-		hash = 37 * hash + this.volume;
-		return hash;
-	}*/
-	
-	/*
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final SingleStock other = (SingleStock) obj;
-		if (!Objects.equals(this.abbreviation, other.abbreviation)) {
-			return false;
-		}
-		if (!Objects.equals(this.name, other.name)) {
-			return false;
-		}
-		if (!Objects.equals(this.date, other.date)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(this.open) != Double.doubleToLongBits(other.open)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(this.high) != Double.doubleToLongBits(other.high)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(this.low) != Double.doubleToLongBits(other.low)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(this.close) != Double.doubleToLongBits(other.close)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(this.adjClose) != Double.doubleToLongBits(other.adjClose)) {
-			return false;
-		}
-		return this.volume == other.volume;
-	}
-	 */
 	
 	@Override
 	public String toString() {
