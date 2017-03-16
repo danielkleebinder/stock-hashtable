@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.SingleStock;
 import data.StockHashtable;
+import util.StockBuilder;
 import util.StockCsvParser;
 
 import java.awt.event.ActionListener;
@@ -171,20 +172,14 @@ public class InputDialog extends JDialog {
 		 * Step 4: make new SingleStock
 		 * Step 5: send it into the XXXStockHashTableXXX -> GUI instead
 		*/
-		StockCsvParser scp = null;
+		StockBuilder scp = null;
 		String[][] my7tokens;
 		
 		try {
-			scp = new StockCsvParser(file);
-			my7tokens = scp.getTokens();
-			/*String abbreviation, String name, String date, 
-			* double open, double high, double low, double close, int volume,
-			* double adjClose
-			*/
-			name = tfName.getText();
-			abbreviation = tfAbb.getText();
-			
-			
+			scp = new StockBuilder(new File("C:\\Users\\Chris-Surface\\Desktop\\table.csv")); //replace with file after testing
+			//my7tokens = scp.getTokens();
+			//name = tfName.getText();
+			//abbreviation = tfAbb.getText();
 			/*
 			stock = new SingleStock(abbreviation, name, my7tokens[0],
 					my7tokens[1], my7tokens[2], my7tokens[3],
@@ -193,7 +188,7 @@ public class InputDialog extends JDialog {
 			InputDialog.this.dispose();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
