@@ -27,13 +27,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * The hashtable input and output class is a utility class for reading and
+ * writing the current state of a stock hashtable as XML.
  *
  * @author Daniel Kleebinder
  */
 public class HashtableIO {
 
+	// Date formatter
 	private static final DateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
+	// Element and attribute names
 	private static final String ROOT = "table";
 	private static final String CAPACITY = "capacity";
 	private static final String THRESHOLD = "threshold";
@@ -49,6 +53,15 @@ public class HashtableIO {
 	private static final String VOLUME = "volume";
 	private static final String ADJCLOSE = "adjclose";
 
+	/**
+	 * Exports the given hashtable as XML file.
+	 *
+	 * @param sht Stock hashtable.
+	 * @param output Output stream.
+	 *
+	 * @throws ParserConfigurationException Can occur while parsing XML.
+	 * @throws TransformerException Can occur while writing XML.
+	 */
 	public static void exportTable(StockHashtable sht, OutputStream output) throws ParserConfigurationException, TransformerException {
 		List<SingleStock> data = sht.asList();
 
@@ -63,6 +76,7 @@ public class HashtableIO {
 		root.setAttribute(THRESHOLD, Integer.toString(sht.getThreshold()));
 		document.appendChild(root);
 
+		// Store table
 		for (SingleStock stock : data) {
 			Element stockElement = document.createElement(STOCK);
 			stockElement.setAttribute(NAME, stock.getName());
@@ -83,6 +97,7 @@ public class HashtableIO {
 			}
 		}
 
+		// Write XML
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -94,20 +109,36 @@ public class HashtableIO {
 		transformer.transform(source, result);
 	}
 
+	/**
+	 * Imports a stock hashtable from the given input stream.
+	 *
+	 * @param input Input stream.
+	 * @return Stock hashtable.
+	 *
+	 * @throws IOException Can occur while reading XML.
+	 * @throws SAXException Can occur while parsing XML.
+	 * @throws ParserConfigurationException Can occur while parsing XML.
+	 * @throws ParseException Can occur while parsing XML.
+	 */
 	public static StockHashtable importTable(InputStream input) throws IOException, SAXException, ParserConfigurationException, ParseException {
+		// Create document builder factory
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(input);
 
+		// Normalize root element
 		document.getDocumentElement().normalize();
 
+		// Fetch root element
 		Element root = document.getDocumentElement();
 
+		// Create hashtable with specific capacity and threashold
 		StockHashtable result = new StockHashtable(
 				Integer.parseInt(root.getAttribute(CAPACITY)),
 				Integer.parseInt(root.getAttribute(THRESHOLD))
 		);
 
+		// Read all hashtable information
 		NodeList stockNodeList = document.getElementsByTagName(STOCK);
 		for (int i = 0; i < stockNodeList.getLength(); i++) {
 			Node stockNode = stockNodeList.item(i);

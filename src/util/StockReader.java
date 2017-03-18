@@ -12,14 +12,24 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
+ * The stock reader class is able to read stock CSV files.
  *
  * @author Daniel Kleebinder
  */
 public class StockReader {
 
+	// Parsing constants for stock CSV files
 	private static final String DELIMITER = ",";
 	private static final DateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
+	/**
+	 * Reads the given CSV stock file.
+	 *
+	 * @param input Input stream.
+	 * @return Single stock.
+	 * @throws IOException Can occur while reading the file.
+	 * @throws ParseException Can occur while parsing the CSV file.
+	 */
 	public SingleStock read(InputStream input) throws IOException, ParseException {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
 			reader.readLine();
