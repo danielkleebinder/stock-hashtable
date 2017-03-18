@@ -14,7 +14,7 @@ import java.util.Locale;
 /**
  * The stock reader class is able to read stock CSV files.
  *
- * @author Daniel Kleebinder
+ * @author Daniel Kleebinder, Christoph Rippel
  */
 public class StockReader {
 

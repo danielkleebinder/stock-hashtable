@@ -17,7 +17,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.SingleStock;
-import util.StockBuilder;
 
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -31,10 +30,9 @@ public class InputDialog extends JDialog {
 	private JTextField tfName;
 	private JTextField tfAbb;
 	private JTextField tfFile;
-	
+
 	private File file;
 	private String name, abbreviation;
-	private StockBuilder sb;
 	private SingleStock stock;
 
 	/**
@@ -58,7 +56,7 @@ public class InputDialog extends JDialog {
 		setBounds(100, 100, 450, 215);
 		//Custom
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
+
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -145,13 +143,12 @@ public class InputDialog extends JDialog {
 						//Filechooser_____________________________________________________________________________________
 						final JFileChooser chooser = new JFileChooser();
 						try {
-							if(chooser.showOpenDialog(InputDialog.this) == JFileChooser.APPROVE_OPTION) {
-								chooser.setFileFilter(new FileNameExtensionFilter("CSV File","csv"));
+							if (chooser.showOpenDialog(InputDialog.this) == JFileChooser.APPROVE_OPTION) {
+								chooser.setFileFilter(new FileNameExtensionFilter("CSV File", "csv"));
 							}
 							file = chooser.getSelectedFile();
 							tfFile.setText(file.getPath());
-						}
-						catch(Exception e) {
+						} catch (Exception e) {
 							JOptionPane.showMessageDialog(InputDialog.this, "Try again, I believe you can do it!",
 									"Wrong file extension", JOptionPane.ERROR_MESSAGE);
 						}
@@ -161,7 +158,7 @@ public class InputDialog extends JDialog {
 			}
 		}
 	}
-	
+
 	private void onConfirm() {
 		try {
 			stock = new StockReader().read(new FileInputStream(file));
@@ -173,16 +170,16 @@ public class InputDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//Getter
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getAbb() {
 		return abbreviation;
 	}
-	
+
 	public SingleStock getStock() {
 		return stock;
 	}
