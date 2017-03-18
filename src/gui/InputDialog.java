@@ -142,6 +142,8 @@ public class InputDialog extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						//Filechooser_____________________________________________________________________________________
 						final JFileChooser chooser = new JFileChooser();
+						chooser.setAcceptAllFileFilterUsed(true);
+						chooser.addChoosableFileFilter(new FileNameExtensionFilter("CSV Stock File", "csv"));
 						try {
 							if (chooser.showOpenDialog(InputDialog.this) == JFileChooser.APPROVE_OPTION) {
 								chooser.setFileFilter(new FileNameExtensionFilter("CSV File", "csv"));

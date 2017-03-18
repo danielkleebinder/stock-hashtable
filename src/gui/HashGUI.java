@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 import data.StockHashtable;
+import java.awt.Event;
 import java.awt.Font;
+import java.awt.Toolkit;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -28,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -106,8 +109,9 @@ public class HashGUI extends JFrame {
 		JMenu mnFile = new JMenu("File");
 		mnFile.setMnemonic('f');
 
-		JMenuItem mntmSave = new JMenuItem("Save");
-		mntmSave.addActionListener((ActionEvent e) -> {
+		JMenuItem save = new JMenuItem("Save");
+		save.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK));
+		save.addActionListener((ActionEvent e) -> {
 			if (saveFile == null) {
 				saveFile = saveAsDialog();
 			}
@@ -119,8 +123,9 @@ public class HashGUI extends JFrame {
 			}
 		});
 
-		JMenuItem mntmSaveAs = new JMenuItem("Save As ...");
-		mntmSaveAs.addActionListener((ActionEvent e) -> {
+		JMenuItem saveAs = new JMenuItem("Save As ...");
+		saveAs.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK | Event.SHIFT_MASK));
+		saveAs.addActionListener((ActionEvent e) -> {
 			saveFile = saveAsDialog();
 			if (saveFile == null) {
 				return;
@@ -130,8 +135,9 @@ public class HashGUI extends JFrame {
 			}
 		});
 
-		JMenuItem mntmLoad = new JMenuItem("Load");
-		mntmLoad.addActionListener((ActionEvent e) -> {
+		JMenuItem load = new JMenuItem("Load");
+		load.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		load.addActionListener((ActionEvent e) -> {
 			loadFile = loadDialog();
 			if (loadFile == null) {
 				return;
@@ -146,9 +152,9 @@ public class HashGUI extends JFrame {
 			System.exit(0);
 		});
 
-		mnFile.add(mntmSave);
-		mnFile.add(mntmSaveAs);
-		mnFile.add(mntmLoad);
+		mnFile.add(save);
+		mnFile.add(saveAs);
+		mnFile.add(load);
 		mnFile.add(new JPopupMenu.Separator());
 		mnFile.add(mntmExit);
 
