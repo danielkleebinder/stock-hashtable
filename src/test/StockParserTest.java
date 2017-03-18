@@ -50,8 +50,8 @@ public class StockParserTest {
 			hashtable.putStock(estx);
 			hashtable.putStock(dji);
 
-			HashtableIO.exportTable(hashtable, new FileOutputStream("C:/Users/Daniel/Desktop/hastable.xml"));
-			hashtable = HashtableIO.importTable(new FileInputStream("C:/Users/Daniel/Desktop/hastable.xml"));
+			HashtableIO.exportTable(hashtable, new FileOutputStream("./hastable.sht"));
+			hashtable = HashtableIO.importTable(new FileInputStream("./hastable.sht"));
 
 			System.out.println(hashtable.getSize());
 			System.out.println(hashtable.getStockByName("Microsoft"));

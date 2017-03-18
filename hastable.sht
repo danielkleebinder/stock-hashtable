@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<table capacity="1024" threshold="512">
+  <stock abbreviation="DJI" name="Dow Jones">
+    <dataset adjclose="20914.619141" close="20914.619141" date="2017-03-17" high="20980.509766" low="20911.070312" open="20965.369141" volume="5.3528E8"/>
+    <dataset adjclose="20934.550781" close="20934.550781" date="2017-03-16" high="21000.109375" low="20893.5" open="20969.269531" volume="2.6436E8"/>
+    <dataset adjclose="20950.099609" close="20950.099609" date="2017-03-15" high="20977.470703" low="20859.599609" open="20874.779297" volume="3.0659E8"/>
+    <dataset adjclose="20837.369141" close="20837.369141" date="2017-03-14" high="20874.0" low="20786.310547" open="20848.599609" volume="2.4682E8"/>
+    <dataset adjclose="20881.480469" close="20881.480469" date="2017-03-13" high="20926.060547" low="20845.710938" open="20899.279297" volume="2.8926E8"/>
+    <dataset adjclose="20902.980469" close="20902.980469" date="2017-03-10" high="20940.289062" low="20827.660156" open="20919.009766" volume="3.1543E8"/>
+    <dataset adjclose="20858.189453" close="20858.189453" date="2017-03-09" high="20900.570312" low="20777.160156" open="20864.320312" volume="2.7596E8"/>
+    <dataset adjclose="20855.730469" close="20855.730469" date="2017-03-08" high="20951.439453" low="20835.580078" open="20940.439453" volume="2.9678E8"/>
+    <dataset adjclose="20924.759766" close="20924.759766" date="2017-03-07" high="20970.539062" low="20901.259766" open="20934.890625" volume="2.7463E8"/>
+    <dataset adjclose="20954.339844" close="20954.339844" date="2017-03-06" high="20986.429688" low="20912.109375" open="20955.710938" volume="2.6662E8"/>
+    <dataset adjclose="21005.710938" close="21005.710938" date="2017-03-03" high="21039.960938" low="20953.859375" open="21008.75" volume="2.5442E8"/>
+    <dataset adjclose="21002.970703" close="21002.970703" date="2017-03-02" high="21129.199219" low="20996.609375" open="21128.910156" volume="3.1991E8"/>
+    <dataset adjclose="21115.550781" close="21115.550781" date="2017-03-01" high="21169.109375" low="20957.289062" open="20957.289062" volume="3.9282E8"/>
+    <dataset adjclose="20812.240234" close="20812.240234" date="2017-02-28" high="20841.240234" low="20781.210938" open="20833.880859" volume="3.3921E8"/>
+    <dataset adjclose="20837.439453" close="20837.439453" date="2017-02-27" high="20851.330078" low="20774.759766" open="20808.710938" volume="2.5654E8"/>
+    <dataset adjclose="20821.759766" close="20821.759766" date="2017-02-24" high="20821.759766" low="20733.949219" open="20751.910156" volume="2.9254E8"/>
+    <dataset adjclose="20810.320312" close="20810.320312" date="2017-02-23" high="20840.699219" low="20746.410156" open="20817.210938" volume="3.0211E8"/>
+    <dataset adjclose="20775.599609" close="20775.599609" date="2017-02-22" high="20781.589844" low="20692.390625" open="20715.410156" volume="3.1053E8"/>
+    <dataset adjclose="20743.0" close="20743.0" date="2017-02-21" high="20757.640625" low="20663.369141" open="20663.429688" volume="3.3688E8"/>
+  </stock>
+  <stock abbreviation="DAX" name="GDAXI">
+    <dataset adjclose="12095.240234" close="12095.240234" date="2017-03-17" high="12117.900391" low="12018.269531" open="12039.240234" volume="1.874357E8"/>
+    <dataset adjclose="12083.179688" close="12083.179688" date="2017-03-16" high="12156.44043" low="12046.070312" open="12140.299805" volume="1.193375E8"/>
+    <dataset adjclose="12009.870117" close="12009.870117" date="2017-03-15" high="12027.049805" low="11977.320312" open="12000.44043" volume="1.013582E8"/>
+    <dataset adjclose="11988.790039" close="11988.790039" date="2017-03-14" high="12002.75" low="11930.379883" open="11987.339844" volume="1.051526E8"/>
+    <dataset adjclose="11990.030273" close="11990.030273" date="2017-03-13" high="12006.009766" low="11949.030273" open="11954.799805" volume="7.56905E7"/>
+    <dataset adjclose="11963.179688" close="11963.179688" date="2017-03-10" high="12067.070312" low="11936.80957" open="12018.480469" volume="1.07316E8"/>
+    <dataset adjclose="11978.389648" close="11978.389648" date="2017-03-09" high="12024.700195" low="11917.780273" open="11923.509766" volume="1.029646E8"/>
+    <dataset adjclose="11967.30957" close="11967.30957" date="2017-03-08" high="12017.280273" low="11922.30957" open="11922.860352" volume="9.61405E7"/>
+    <dataset adjclose="11966.139648" close="11966.139648" date="2017-03-07" high="11988.870117" low="11935.330078" open="11963.759766" volume="7.64529E7"/>
+    <dataset adjclose="11958.400391" close="11958.400391" date="2017-03-06" high="11998.830078" low="11921.570312" open="11956.80957" volume="9.61928E7"/>
+    <dataset adjclose="12027.360352" close="12027.360352" date="2017-03-03" high="12058.209961" low="11995.400391" open="11998.05957" volume="1.001943E8"/>
+    <dataset adjclose="12059.570312" close="12059.570312" date="2017-03-02" high="12082.589844" low="12041.900391" open="12052.799805" volume="7.96379E7"/>
+    <dataset adjclose="12067.19043" close="12067.19043" date="2017-03-01" high="12074.019531" low="11913.839844" open="11915.030273" volume="1.06268E8"/>
+    <dataset adjclose="11834.410156" close="11834.410156" date="2017-02-28" high="11853.5" low="11780.830078" open="11847.089844" volume="7.12946E7"/>
+    <dataset adjclose="11822.669922" close="11822.669922" date="2017-02-27" high="11860.820312" low="11792.509766" open="11858.139648" volume="6.28471E7"/>
+    <dataset adjclose="11804.030273" close="11804.030273" date="2017-02-24" high="11934.639648" low="11722.349609" open="11920.900391" volume="9.87021E7"/>
+    <dataset adjclose="11947.830078" close="11947.830078" date="2017-02-23" high="12015.980469" low="11925.879883" open="11994.05957" volume="6.97725E7"/>
+    <dataset adjclose="11998.589844" close="11998.589844" date="2017-02-22" high="12031.110352" low="11966.019531" open="11989.709961" volume="9.18688E7"/>
+    <dataset adjclose="11967.490234" close="11967.490234" date="2017-02-21" high="11987.580078" low="11798.480469" open="11817.969727" volume="7.54951E7"/>
+    <dataset adjclose="11827.620117" close="11827.620117" date="2017-02-20" high="11841.05957" low="11804.719727" open="11831.709961" volume="5.46934E7"/>
+  </stock>
+  <stock abbreviation="MSFT" name="Microsoft">
+    <dataset adjclose="64.870003" close="64.870003" date="2017-03-17" high="65.239998" low="64.68" open="64.910004" volume="4.89947E7"/>
+    <dataset adjclose="64.639999" close="64.639999" date="2017-03-16" high="64.760002" low="64.300003" open="64.75" volume="2.05326E7"/>
+    <dataset adjclose="64.75" close="64.75" date="2017-03-15" high="64.919998" low="64.25" open="64.550003" volume="2.05019E7"/>
+    <dataset adjclose="64.410004" close="64.410004" date="2017-03-14" high="64.550003" low="64.150002" open="64.529999" volume="1.42637E7"/>
+    <dataset adjclose="64.709999" close="64.709999" date="2017-03-13" high="65.190002" low="64.57" open="65.010002" volume="1.95518E7"/>
+    <dataset adjclose="64.93" close="64.93" date="2017-03-10" high="65.260002" low="64.75" open="65.110001" volume="1.95283E7"/>
+    <dataset adjclose="64.730003" close="64.730003" date="2017-03-09" high="65.199997" low="64.480003" open="65.190002" volume="1.97727E7"/>
+    <dataset adjclose="64.989998" close="64.989998" date="2017-03-08" high="65.080002" low="64.25" open="64.260002" volume="2.09617E7"/>
+    <dataset adjclose="64.400002" close="64.400002" date="2017-03-07" high="64.779999" low="64.190002" open="64.190002" volume="1.83007E7"/>
+    <dataset adjclose="64.269997" close="64.269997" date="2017-03-06" high="64.559998" low="63.810001" open="63.970001" volume="1.74877E7"/>
+    <dataset adjclose="64.25" close="64.25" date="2017-03-03" high="64.279999" low="63.619999" open="63.990002" volume="1.81359E7"/>
+    <dataset adjclose="64.010002" close="64.010002" date="2017-03-02" high="64.75" low="63.880001" open="64.690002" volume="2.45109E7"/>
+    <dataset adjclose="64.940002" close="64.940002" date="2017-03-01" high="64.989998" low="64.019997" open="64.129997" volume="2.67638E7"/>
+    <dataset adjclose="63.98" close="63.98" date="2017-02-28" high="64.199997" low="63.759998" open="64.080002" volume="2.30439E7"/>
+    <dataset adjclose="64.230003" close="64.230003" date="2017-02-27" high="64.540001" low="64.050003" open="64.540001" volume="1.58504E7"/>
+    <dataset adjclose="64.620003" close="64.620003" date="2017-02-24" high="64.800003" low="64.139999" open="64.529999" volume="2.17052E7"/>
+    <dataset adjclose="64.620003" close="64.620003" date="2017-02-23" high="64.730003" low="64.190002" open="64.419998" volume="2.02352E7"/>
+    <dataset adjclose="64.360001" close="64.360001" date="2017-02-22" high="64.389999" low="64.050003" open="64.330002" volume="1.92597E7"/>
+    <dataset adjclose="64.489998" close="64.489998" date="2017-02-21" high="64.949997" low="64.449997" open="64.610001" volume="1.93849E7"/>
+  </stock>
+  <stock abbreviation="ESTX" name="Euro Stock Exchange">
+    <dataset adjclose="3448.41" close="3448.41" date="2017-03-17" high="3448.41" low="3448.41" open="3448.41" volume="0.0"/>
+    <dataset adjclose="3439.96" close="3439.96" date="2017-03-16" high="3439.96" low="3439.96" open="3439.96" volume="0.0"/>
+    <dataset adjclose="3409.32" close="3409.32" date="2017-03-15" high="3409.32" low="3409.32" open="3409.32" volume="0.0"/>
+    <dataset adjclose="3399.44" close="3399.44" date="2017-03-14" high="3399.44" low="3399.44" open="3399.44" volume="0.0"/>
+    <dataset adjclose="3415.49" close="3415.49" date="2017-03-13" high="3415.49" low="3415.49" open="3415.49" volume="0.0"/>
+    <dataset adjclose="3416.27" close="3416.27" date="2017-03-10" high="3416.27" low="3416.27" open="3416.27" volume="0.0"/>
+    <dataset adjclose="3409.89" close="3409.89" date="2017-03-09" high="3409.89" low="3409.89" open="3409.89" volume="0.0"/>
+    <dataset adjclose="3389.62" close="3389.62" date="2017-03-08" high="3389.62" low="3389.62" open="3389.62" volume="0.0"/>
+    <dataset adjclose="3385.12" close="3385.12" date="2017-03-07" high="3385.12" low="3385.12" open="3385.12" volume="0.0"/>
+    <dataset adjclose="3390.2" close="3390.2" date="2017-03-01" high="3390.2" low="3390.2" open="3390.2" volume="0.0"/>
+    <dataset adjclose="3339.33" close="3339.33" date="2017-02-21" high="3339.33" low="3339.33" open="3339.33" volume="0.0"/>
+  </stock>
+</table>
