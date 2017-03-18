@@ -5,7 +5,7 @@ import java.util.List;
 import util.StringUtils;
 
 /**
- * Main stock hashtable class.
+ * A hashtable for storing stock data very efficient.
  *
  * @author Daniel Kleebinder, Christoph Rippel
  */
@@ -292,6 +292,9 @@ public class StockHashtable {
 	 * @return Hash table index.
 	 */
 	private int keyIndex(String str) {
+		if (str == null) {
+			throw new NullPointerException("Name or abbreviation is null");
+		}
 		return StringUtils.hashCode(str) % maxCapacity;
 	}
 
