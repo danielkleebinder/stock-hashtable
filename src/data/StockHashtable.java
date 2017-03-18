@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
 import util.StringUtils;
 
 /**
@@ -268,6 +270,22 @@ public class StockHashtable {
 	}
 
 	/**
+	 * Returns the stock hashtable as a simple list.
+	 *
+	 * @return List with all single stock values in it.
+	 */
+	public List<SingleStock> asList() {
+		List<SingleStock> result = new ArrayList<>(32);
+		for (int i = 0; i < stockHT.length; i++) {
+			if (stockHT[i] == null) {
+				continue;
+			}
+			result.add(stockHT[i]);
+		}
+		return result;
+	}
+
+	/**
 	 * Returns the global index of the given string.
 	 *
 	 * @param str String.
@@ -327,10 +345,24 @@ public class StockHashtable {
 		return size;
 	}
 
+	/**
+	 * Linear probing is a simple and very performant algorithm for inserting
+	 * new elements.
+	 *
+	 * @param index Current index.
+	 * @return Probed index.
+	 */
 	private int linearProbing(int index) {
 		return (index + 1) % maxCapacity;
 	}
 
+	/**
+	 * Squared probing can be more performant than linear probing by using a
+	 * squared algorithm.
+	 *
+	 * @param index Current index.
+	 * @return Probed index.
+	 */
 	private int squaredProbing(int index) {
 		return ((index + 1) * (index + 1)) % maxCapacity;
 	}

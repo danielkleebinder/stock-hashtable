@@ -104,7 +104,7 @@ public class HashGUI extends JFrame {
 		mnFile.add(separator);
 		mnFile.add(mntmExit);
 
-		JMenu navigation = new JMenu("Navigate");
+		JMenu edit = new JMenu("Edit");
 
 		JMenuItem selectStock = new JMenuItem("Select Stock");
 		JMenuItem mntmImport = new JMenuItem("Import New Stock");
@@ -114,12 +114,14 @@ public class HashGUI extends JFrame {
 			indi.setVisible(true);
 			sht.putStock(indi.getStock());
 		});
+		JMenuItem deleteStock = new JMenuItem("Delete Stock");
 
-		navigation.add(selectStock);
-		navigation.add(mntmImport);
+		edit.add(selectStock);
+		edit.add(mntmImport);
+		edit.add(deleteStock);
 
 		menuBar.add(mnFile);
-		menuBar.add(navigation);
+		menuBar.add(edit);
 
 		centerContentPane.add(stockTitle, BorderLayout.NORTH);
 		centerContentPane.add(tabbedPane, BorderLayout.CENTER);
