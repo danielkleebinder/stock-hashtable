@@ -22,6 +22,8 @@ import util.StockBuilder;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import util.StockReader;
 
 public class InputDialog extends JDialog {
 
@@ -53,10 +55,9 @@ public class InputDialog extends JDialog {
 	 */
 	public InputDialog() {
 		setTitle("Sieht doch ganz passabel aus");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 215);
 		//Custom
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setAlwaysOnTop(true);
 		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
@@ -163,8 +164,9 @@ public class InputDialog extends JDialog {
 	
 	private void onConfirm() {
 		try {
-			sb = new StockBuilder(new File("C:\\Users\\Chris-Surface\\Desktop\\table.csv")); //replace with file after testing
-			stock = new SingleStock(tfName.getText(), tfAbb.getText(), sb.getFilledStockDataset());
+			stock = new StockReader().read(new FileInputStream(file));
+			stock.setName(tfName.getText());
+			stock.setAbbreviation(tfAbb.getText());
 			InputDialog.this.dispose();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(InputDialog.this, "File could not be read!", "Parsing error", JOptionPane.ERROR_MESSAGE);

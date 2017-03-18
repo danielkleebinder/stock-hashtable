@@ -71,6 +71,16 @@ public class StockHashtable {
 	}
 
 	/**
+	 * Puts the given stock into the hashtable.
+	 *
+	 * @param st Stock.
+	 * @return True if added successfully, otherwise false.
+	 */
+	public boolean putStock(SingleStock st) {
+		return putStock(st.getName(), st.getAbbreviation(), st);
+	}
+
+	/**
 	 * Puts the given stock using the given name and abbreviation.
 	 *
 	 * @param name Name.

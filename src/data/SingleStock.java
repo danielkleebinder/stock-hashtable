@@ -1,23 +1,28 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Single stock model class.
  *
  * @author Daniel Kleebinder, Christoph Rippel
  */
-
 public class SingleStock {
 
 	private String abbreviation, name;
-	private StockDataset[] stockdata;
+	private List<StockDataset> stockdata = new ArrayList<>(64);
 
 	public SingleStock() {
 	}
 
-	public SingleStock(String abbreviation, String name, StockDataset[] stockdata) {
+	public SingleStock(String abbreviation, String name, StockDataset... stockdata) {
 		this.abbreviation = abbreviation;
 		this.name = name;
-		this.stockdata = stockdata;
+
+		for (StockDataset sds : stockdata) {
+			this.stockdata.add(sds);
+		}
 	}
 
 	public void setAbbreviation(String abbreviation) {
@@ -36,14 +41,14 @@ public class SingleStock {
 		return name;
 	}
 
-	public void setStockDataset(StockDataset[] stockdata) {
+	public void setStockdata(List<StockDataset> stockdata) {
 		this.stockdata = stockdata;
 	}
-	
-	public StockDataset[] getStockDataset() {
+
+	public List<StockDataset> getStockdata() {
 		return stockdata;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
