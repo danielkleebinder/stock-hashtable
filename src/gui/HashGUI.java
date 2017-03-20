@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 import data.StockHashtable;
+import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -36,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -90,7 +92,7 @@ public class HashGUI extends JFrame {
 	 */
 	public HashGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1050, 600);
+		setBounds(100, 100, 1050, 650);
 
 		documentName = createTitleByName(null);
 		setTitle(documentName);
@@ -98,7 +100,8 @@ public class HashGUI extends JFrame {
 		JPanel centerContentPane = new JPanel(new BorderLayout());
 
 		stockTitle = new JLabel("< Nothing Selected >");
-		stockTitle.setFont(stockTitle.getFont().deriveFont(Font.BOLD, 14.0f));
+		stockTitle.setPreferredSize(new Dimension(300, 50));
+		stockTitle.setFont(stockTitle.getFont().deriveFont(Font.BOLD, 18.0f));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
@@ -112,7 +115,7 @@ public class HashGUI extends JFrame {
 		tabbedPane.addTab("Table", null, scrollPane, null);
 		table.setFillsViewportHeight(true);
 
-		dtm = new DefaultTableModel(30, 7);
+		dtm = new DefaultTableModel(40, 7);
 		table.setModel(dtm);
 		Object[] columnIdentifiers = {"Date", "Open", "High", "Low", "Close", "Volume", "adjClose"};
 		dtm.setColumnIdentifiers(columnIdentifiers);

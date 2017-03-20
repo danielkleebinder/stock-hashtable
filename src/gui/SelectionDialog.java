@@ -26,6 +26,7 @@ public class SelectionDialog extends javax.swing.JDialog {
 
 	private SingleStock selectedStock;
 	private File loadFile;
+	private File selectedFile;
 
 	/**
 	 * Creates new form SelectionDialog
@@ -57,11 +58,6 @@ public class SelectionDialog extends javax.swing.JDialog {
         quickSearchAbbreviationInput = new javax.swing.JTextField();
         quickSearchSearchButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        searchAbbreviation = new javax.swing.JTextField();
-        searchName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         searchResults = new javax.swing.JList<SingleStock>();
         closeButton = new javax.swing.JButton();
@@ -155,47 +151,6 @@ public class SelectionDialog extends javax.swing.JDialog {
                     .addComponent(jButton2)
                     .addComponent(quickSearchSearchButton))
                 .addGap(0, 11, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Search"));
-
-        jLabel6.setText("Abbreviation");
-
-        jLabel5.setText("Name");
-
-        searchName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchNameActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchName)
-                    .addComponent(searchAbbreviation))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(searchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchAbbreviation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         searchResults.setModel(new DefaultListModel<SingleStock>());
@@ -314,7 +269,6 @@ public class SelectionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
@@ -330,14 +284,12 @@ public class SelectionDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
@@ -345,7 +297,9 @@ public class SelectionDialog extends javax.swing.JDialog {
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(closeButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -360,13 +314,25 @@ public class SelectionDialog extends javax.swing.JDialog {
 		String name = quickSearchNameInput.getText();
 		String abbr = quickSearchAbbreviationInput.getText();
 
-		SingleStock stock;
+		SingleStock stock = null;
 		if (name != null && !name.isEmpty()) {
-			stock = sht.getStockByName(name);
+			if (sht.containsStockByName(name)) {
+				stock = sht.getStockByName(name);
+			}
 		}
 		if (abbr != null && !abbr.isEmpty()) {
-			stock = sht.getStockByAbbreviation(abbr);
+			if (sht.containsStockByAbbreviation(abbr)) {
+				stock = sht.getStockByAbbreviation(abbr);
+			}
 		}
+
+		if (stock == null) {
+			JOptionPane.showMessageDialog(null, "No stock entry for the given name or abbreviation in the hashtable found!", "No Entry Found", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+
+		searchResults.clearSelection();
+		searchResults.setListData(new SingleStock[]{stock});
     }//GEN-LAST:event_quickSearchSearchButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
@@ -376,10 +342,12 @@ public class SelectionDialog extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 		quickSearchNameInput.setText("");
 		quickSearchAbbreviationInput.setText("");
+
+		fillSearchResult();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+		fillSearchResult();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -391,7 +359,7 @@ public class SelectionDialog extends javax.swing.JDialog {
 		SingleStock ss = (SingleStock) searchResults.getSelectedValue();
 
 		if (ss == null) {
-			JOptionPane.showMessageDialog(null, "No stock entry selected to remove!", "Nothin Selected", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No stock entry selected to remove!", "Nothing Selected", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 
@@ -403,12 +371,8 @@ public class SelectionDialog extends javax.swing.JDialog {
 		}
 
 		// Remove selected item from list
-		searchResults.setListData(sht.toArray());
+		fillSearchResult();
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void searchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchNameActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_searchNameActionPerformed
 
     private void insertNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertNameActionPerformed
 		// TODO add your handling code here:
@@ -431,16 +395,26 @@ public class SelectionDialog extends javax.swing.JDialog {
 			return;
 		}
 
-		if (loadFile == null) {
+		if (selectedFile == null) {
 			JOptionPane.showMessageDialog(null, "No CSV stock file selected", "No Stock File", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 
 		try {
-			SingleStock stock = new StockReader().read(new FileInputStream(loadFile));
+			SingleStock stock = new StockReader().read(new FileInputStream(selectedFile));
 			stock.setName(name);
 			stock.setAbbreviation(abbr);
+
 			sht.putStockByName(stock.getName(), stock);
+
+			insertName.setText("");
+			insertAbbreviation.setText("");
+			insertCSVStockPath.setText("");
+
+			selectedFile = null;
+
+			// Update list
+			fillSearchResult();
 		} catch (IOException | ParseException ex) {
 			JOptionPane.showMessageDialog(null, "Cannot load the selected CSV stock file!", "Loading Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -451,11 +425,18 @@ public class SelectionDialog extends javax.swing.JDialog {
 		jfc.setAcceptAllFileFilterUsed(false);
 		jfc.addChoosableFileFilter(new FileNameExtensionFilter("CSV Stock File", "csv"));
 		if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			if (loadFile != null) {
-				loadFile = jfc.getSelectedFile();
-			}
+			selectedFile = loadFile = jfc.getSelectedFile();
+			insertCSVStockPath.setText(selectedFile.getPath());
 		}
     }//GEN-LAST:event_chooseFileButtonActionPerformed
+
+	/**
+	 * Fills the search results.
+	 */
+	public void fillSearchResult() {
+		searchResults.clearSelection();
+		searchResults.setListData(sht.toArray());
+	}
 
 	/**
 	 * Returns the selected stock.
@@ -521,20 +502,15 @@ public class SelectionDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField quickSearchAbbreviationInput;
     private javax.swing.JTextField quickSearchNameInput;
     private javax.swing.JButton quickSearchSearchButton;
-    private javax.swing.JTextField searchAbbreviation;
-    private javax.swing.JTextField searchName;
     private javax.swing.JList searchResults;
     // End of variables declaration//GEN-END:variables
 }

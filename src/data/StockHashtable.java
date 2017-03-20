@@ -196,9 +196,10 @@ public class StockHashtable {
 				index = squaredProbing(index);
 			}
 		}
+		stockHT[index] = null;
 
 		// Move all items after the deleted one
-		for (int j = (index + 1) % maxCapacity; stockHT[j] != null; j = (j + 1) % maxCapacity) {
+		for (int j = index; stockHT[j] != null; j = (j + 1) % maxCapacity) {
 			buffer = stockHT[j];
 			stockHT[j] = null;
 			putStockByName(name, buffer);
@@ -291,15 +292,7 @@ public class StockHashtable {
 	 * @return Array with all single stock values in it.
 	 */
 	public SingleStock[] toArray() {
-		int c = 0;
-		SingleStock[] result = new SingleStock[size];
-		for (int i = 0; i < stockHT.length; i++) {
-			if (stockHT[i] == null) {
-				continue;
-			}
-			result[c++] = stockHT[i];
-		}
-		return result;
+		return asList().toArray(new SingleStock[size]);
 	}
 
 	/**
