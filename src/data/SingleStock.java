@@ -52,7 +52,7 @@ public class SingleStock {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append("SingleStock{abbreviation=").append(abbreviation).append(", name=").append(name).append("}");
+		result.append(name).append(" (").append(abbreviation).append(")");
 		return result.toString();
 	}
 }

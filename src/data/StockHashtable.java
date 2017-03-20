@@ -275,7 +275,7 @@ public class StockHashtable {
 	 * @return List with all single stock values in it.
 	 */
 	public List<SingleStock> asList() {
-		List<SingleStock> result = new ArrayList<>(32);
+		List<SingleStock> result = new ArrayList<>(size);
 		for (int i = 0; i < stockHT.length; i++) {
 			if (stockHT[i] == null) {
 				continue;

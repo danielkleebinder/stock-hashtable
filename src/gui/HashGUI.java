@@ -1,5 +1,7 @@
 package gui;
 
+import data.SingleStock;
+import data.StockDataset;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -22,7 +24,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -36,14 +41,22 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.xml.sax.SAXException;
 import util.HashtableIO;
 
 public class HashGUI extends JFrame {
 
 	private StockHashtable sht; //Source for table data
-	InputDialog id = new InputDialog(); //source for stockhashtable
+	private SingleStock selectedStock;
 	DefaultTableModel dtm; //used for displaying stock
+
+	private JLabel stockTitle;
+	private ChartPanel chartPanel;
 
 	private File saveFile;
 	private File loadFile;
@@ -75,16 +88,15 @@ public class HashGUI extends JFrame {
 	 */
 	public HashGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 453);
+		setBounds(100, 100, 1050, 600);
 
 		JPanel centerContentPane = new JPanel(new BorderLayout());
 
-		JLabel stockTitle = new JLabel("< Nothing Selected >");
+		stockTitle = new JLabel("< Nothing Selected >");
 		stockTitle.setFont(stockTitle.getFont().deriveFont(Font.BOLD, 14.0f));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-		//Stock Data stored here____________________________________________________________________________
 		sht = new StockHashtable();
 		this.setLocationRelativeTo(null);
 
@@ -99,11 +111,10 @@ public class HashGUI extends JFrame {
 		table.setModel(dtm);
 		Object[] columnIdentifiers = {"Date", "Open", "High", "Low", "Close", "Volume", "adjClose"};
 		dtm.setColumnIdentifiers(columnIdentifiers);
-		//_________________________________________________________________________________________________
 
-//		JFreeChart lineChart = ChartFactory.createLineChart(stock.getName() + "(" + stock.getAbbreviation() + ")", "Days", "€ EUR", dataset);
-//		ChartPanel chartPanel = new ChartPanel(lineChart);
-//		tabbedPane.addTab("Graph", null, chartPanel, null);
+		chartPanel = new ChartPanel(null);
+		tabbedPane.addTab("Graph", null, chartPanel, null);
+
 		JMenuBar menuBar = new JMenuBar();
 
 		JMenu mnFile = new JMenu("File");
@@ -161,6 +172,16 @@ public class HashGUI extends JFrame {
 		JMenu edit = new JMenu("Edit");
 
 		JMenuItem selectStock = new JMenuItem("Select Stock");
+		selectStock.addActionListener((ActionEvent e) -> {
+			SelectionDialog selectionDialog = new SelectionDialog(sht);
+			selectionDialog.setVisible(true);
+
+			SingleStock selected = selectionDialog.getSelectedStock();
+			if (selected != null) {
+				selectedStock = selected;
+				updateGUI();
+			}
+		});
 		JMenuItem mntmImport = new JMenuItem("Import New Stock");
 		mntmImport.addActionListener((ActionEvent e) -> {
 			InputDialog indi = new InputDialog();
@@ -168,11 +189,9 @@ public class HashGUI extends JFrame {
 			indi.setVisible(true);
 			sht.putStock(indi.getStock());
 		});
-		JMenuItem deleteStock = new JMenuItem("Delete Stock");
 
 		edit.add(selectStock);
 		edit.add(mntmImport);
-		edit.add(deleteStock);
 
 		menuBar.add(mnFile);
 		menuBar.add(edit);
@@ -182,6 +201,56 @@ public class HashGUI extends JFrame {
 
 		getContentPane().add(menuBar, BorderLayout.NORTH);
 		getContentPane().add(centerContentPane, BorderLayout.CENTER);
+	}
+
+	/**
+	 * Updates the GUI.
+	 */
+	private void updateGUI() {
+		// Set stock title
+		stockTitle.setText(selectedStock.toString());
+
+		// Set chart data
+		double lowest = Double.MAX_VALUE;
+		double highest = Double.MIN_VALUE;
+
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for (int i = selectedStock.getStockdata().size() - 1; i >= 0; i--) {
+			StockDataset sds = selectedStock.getStockdata().get(i);
+			String formatted = new SimpleDateFormat("dd.MM").format(sds.getDate());
+
+			dataset.addValue((Number) sds.getOpen(), "Open", formatted);
+			dataset.addValue((Number) sds.getClose(), "Close", formatted);
+
+			lowest = (lowest > sds.getOpen()) ? sds.getOpen() : lowest;
+			highest = (highest < sds.getOpen()) ? sds.getOpen() : highest;
+		}
+
+		JFreeChart lineChart = ChartFactory.createLineChart(selectedStock.toString(), "Days", "€ EUR", dataset);
+		lineChart.setAntiAlias(true);
+		lineChart.getCategoryPlot().getRangeAxis().setRange(lowest * 0.99, highest * 1.01);
+		((NumberAxis) lineChart.getCategoryPlot().getRangeAxis()).setAutoRangeIncludesZero(true);
+		((NumberAxis) lineChart.getCategoryPlot().getRangeAxis()).setAutoRangeStickyZero(true);
+		chartPanel.setChart(lineChart);
+
+		// Set table data
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+
+		NumberFormat nf = NumberFormat.getCurrencyInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+
+		StockDataset sds;
+		for (int i = 0; i < selectedStock.getStockdata().size(); i++) {
+			sds = selectedStock.getStockdata().get(i);
+			dtm.setValueAt(sdf.format(sds.getDate()), i, 0);
+			dtm.setValueAt(nf.format(sds.getOpen()), i, 1);
+			dtm.setValueAt(nf.format(sds.getHigh()), i, 2);
+			dtm.setValueAt(nf.format(sds.getLow()), i, 3);
+			dtm.setValueAt(nf.format(sds.getClose()), i, 4);
+			dtm.setValueAt(nf.format(sds.getVolume()), i, 5);
+			dtm.setValueAt(nf.format(sds.getAdjClose()), i, 6);
+		}
 	}
 
 	/**
