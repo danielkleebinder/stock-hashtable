@@ -286,6 +286,23 @@ public class StockHashtable {
 	}
 
 	/**
+	 * Returns the stock hashtable as a simple array.
+	 *
+	 * @return Array with all single stock values in it.
+	 */
+	public SingleStock[] toArray() {
+		int c = 0;
+		SingleStock[] result = new SingleStock[size];
+		for (int i = 0; i < stockHT.length; i++) {
+			if (stockHT[i] == null) {
+				continue;
+			}
+			result[c++] = stockHT[i];
+		}
+		return result;
+	}
+
+	/**
 	 * Returns the global index of the given string.
 	 *
 	 * @param str String.

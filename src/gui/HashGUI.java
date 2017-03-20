@@ -55,6 +55,8 @@ public class HashGUI extends JFrame {
 	private SingleStock selectedStock;
 	DefaultTableModel dtm; //used for displaying stock
 
+	private String documentName;
+
 	private JLabel stockTitle;
 	private ChartPanel chartPanel;
 
@@ -89,6 +91,9 @@ public class HashGUI extends JFrame {
 	public HashGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1050, 600);
+
+		documentName = createTitleByName(null);
+		setTitle(documentName);
 
 		JPanel centerContentPane = new JPanel(new BorderLayout());
 
@@ -141,9 +146,12 @@ public class HashGUI extends JFrame {
 			if (saveFile == null) {
 				return;
 			}
+			documentName = createTitleByName(saveFile.getName());
 			if (!saveHashtable(saveFile)) {
 				JOptionPane.showConfirmDialog(null, "Cannot save file!", "Save", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+				return;
 			}
+			setTitle(documentName);
 		});
 
 		JMenuItem load = new JMenuItem("Load...");
@@ -153,9 +161,12 @@ public class HashGUI extends JFrame {
 			if (loadFile == null) {
 				return;
 			}
+			saveFile = new File(loadFile.getPath());
+			documentName = createTitleByName(saveFile.getName());
 			if (!loadHashtable(loadFile)) {
 				JOptionPane.showConfirmDialog(null, "Cannot load file!", "Load", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
 			}
+			setTitle(documentName);
 		});
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -214,9 +225,11 @@ public class HashGUI extends JFrame {
 
 			dataset.addValue((Number) sds.getOpen(), "Open", formatted);
 			dataset.addValue((Number) sds.getClose(), "Close", formatted);
+			dataset.addValue((Number) sds.getLow(), "Low", formatted);
+			dataset.addValue((Number) sds.getHigh(), "High", formatted);
 
-			lowest = (lowest > sds.getOpen()) ? sds.getOpen() : lowest;
-			highest = (highest < sds.getOpen()) ? sds.getOpen() : highest;
+			lowest = (lowest > sds.getLow()) ? sds.getLow() : lowest;
+			highest = (highest < sds.getHigh()) ? sds.getHigh() : highest;
 		}
 
 		JFreeChart lineChart = ChartFactory.createLineChart(selectedStock.toString(), "Days", "€ EUR", dataset);
@@ -304,5 +317,21 @@ public class HashGUI extends JFrame {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Creates the window title by the given file name.
+	 *
+	 * @param fileName File name.
+	 * @return Window title.
+	 */
+	private String createTitleByName(String fileName) {
+		StringBuilder result = new StringBuilder();
+		if (fileName != null && !fileName.isEmpty()) {
+			result.append(fileName);
+			result.append(" - ");
+		}
+		result.append("Stock HashTable GUI 1.0.0");
+		return result.toString();
 	}
 }

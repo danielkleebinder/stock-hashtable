@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,6 +24,7 @@ public class SelectionDialog extends javax.swing.JDialog {
 	 */
 	private final StockHashtable sht;
 
+	private SingleStock selectedStock;
 	private File loadFile;
 
 	/**
@@ -198,15 +198,9 @@ public class SelectionDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        searchResults.setModel(new AbstractListModel(){
-            List<SingleStock> lss = sht.asList();
-            public int getSize() {
-                return lss.size();
-            }
-            public SingleStock getElementAt(int index) {
-                return lss.get(index);
-            }
-        });
+        searchResults.setModel(new DefaultListModel<SingleStock>());
+        searchResults.setListData(sht.toArray());
+        searchResults.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(searchResults);
 
         closeButton.setText("Close");
@@ -389,21 +383,27 @@ public class SelectionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-		dispose();
+		selectedStock = (SingleStock) searchResults.getSelectedValue();
+		closeButtonActionPerformed(evt);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 		SingleStock ss = (SingleStock) searchResults.getSelectedValue();
 
 		if (ss == null) {
+			JOptionPane.showMessageDialog(null, "No stock entry selected to remove!", "Nothin Selected", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 
+		// Remove selected item from stock hashtable
 		if (ss.getName() != null && !ss.getName().isEmpty()) {
 			sht.removeStockByName(ss.getName());
 		} else if (ss.getAbbreviation() != null && !ss.getAbbreviation().isEmpty()) {
 			sht.removeStockByAbbreviation(ss.getAbbreviation());
 		}
+
+		// Remove selected item from list
+		searchResults.setListData(sht.toArray());
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void searchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchNameActionPerformed
@@ -457,8 +457,13 @@ public class SelectionDialog extends javax.swing.JDialog {
 		}
     }//GEN-LAST:event_chooseFileButtonActionPerformed
 
+	/**
+	 * Returns the selected stock.
+	 *
+	 * @return Selected stock.
+	 */
 	public SingleStock getSelectedStock() {
-		return (SingleStock) searchResults.getSelectedValue();
+		return selectedStock;
 	}
 
 	/**
