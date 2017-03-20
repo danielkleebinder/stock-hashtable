@@ -1,5 +1,6 @@
 package gui;
 
+import assets.AssetsLoader;
 import data.SingleStock;
 import data.StockDataset;
 import java.awt.BorderLayout;
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -91,6 +93,7 @@ public class HashGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public HashGUI() {
+		setIconImage(AssetsLoader.ICON);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1050, 650);
 
@@ -129,6 +132,7 @@ public class HashGUI extends JFrame {
 		mnFile.setMnemonic('f');
 
 		JMenuItem save = new JMenuItem("Save");
+		save.setIcon(new ImageIcon(AssetsLoader.SAVE));
 		save.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK));
 		save.addActionListener((ActionEvent e) -> {
 			if (saveFile == null) {
@@ -143,6 +147,7 @@ public class HashGUI extends JFrame {
 		});
 
 		JMenuItem saveAs = new JMenuItem("Save As...");
+		saveAs.setIcon(new ImageIcon(AssetsLoader.SAVE));
 		saveAs.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK | Event.SHIFT_MASK));
 		saveAs.addActionListener((ActionEvent e) -> {
 			saveFile = saveAsDialog();
@@ -158,6 +163,7 @@ public class HashGUI extends JFrame {
 		});
 
 		JMenuItem load = new JMenuItem("Load...");
+		load.setIcon(new ImageIcon(AssetsLoader.OPEN));
 		load.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		load.addActionListener((ActionEvent e) -> {
 			loadFile = loadDialog();
@@ -186,6 +192,7 @@ public class HashGUI extends JFrame {
 		JMenu edit = new JMenu("Edit");
 
 		JMenuItem editStockArchive = new JMenuItem("Edit Stock Archive...");
+		editStockArchive.setIcon(new ImageIcon(AssetsLoader.INSERT));
 		editStockArchive.setAccelerator(KeyStroke.getKeyStroke('E', Event.CTRL_MASK));
 		editStockArchive.addActionListener((ActionEvent e) -> {
 			SelectionDialog selectionDialog = new SelectionDialog(sht);

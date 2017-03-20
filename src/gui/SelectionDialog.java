@@ -1,5 +1,6 @@
 package gui;
 
+import assets.AssetsLoader;
 import data.SingleStock;
 import data.StockHashtable;
 import java.io.File;
@@ -85,7 +86,8 @@ public class SelectionDialog extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selection Dialog");
+        setTitle("Edit Stock Archive");
+        setIconImage(AssetsLoader.INSERT);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Quick Search"));
 
