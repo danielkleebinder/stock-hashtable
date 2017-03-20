@@ -134,7 +134,7 @@ public class HashGUI extends JFrame {
 			}
 		});
 
-		JMenuItem saveAs = new JMenuItem("Save As ...");
+		JMenuItem saveAs = new JMenuItem("Save As...");
 		saveAs.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK | Event.SHIFT_MASK));
 		saveAs.addActionListener((ActionEvent e) -> {
 			saveFile = saveAsDialog();
@@ -146,7 +146,7 @@ public class HashGUI extends JFrame {
 			}
 		});
 
-		JMenuItem load = new JMenuItem("Load");
+		JMenuItem load = new JMenuItem("Load...");
 		load.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		load.addActionListener((ActionEvent e) -> {
 			loadFile = loadDialog();
@@ -171,8 +171,9 @@ public class HashGUI extends JFrame {
 
 		JMenu edit = new JMenu("Edit");
 
-		JMenuItem selectStock = new JMenuItem("Select Stock");
-		selectStock.addActionListener((ActionEvent e) -> {
+		JMenuItem editStockArchive = new JMenuItem("Edit Stock Archive...");
+		editStockArchive.setAccelerator(KeyStroke.getKeyStroke('E', Event.CTRL_MASK));
+		editStockArchive.addActionListener((ActionEvent e) -> {
 			SelectionDialog selectionDialog = new SelectionDialog(sht);
 			selectionDialog.setVisible(true);
 
@@ -182,16 +183,8 @@ public class HashGUI extends JFrame {
 				updateGUI();
 			}
 		});
-		JMenuItem mntmImport = new JMenuItem("Import New Stock");
-		mntmImport.addActionListener((ActionEvent e) -> {
-			InputDialog indi = new InputDialog();
-			indi.setModal(true);
-			indi.setVisible(true);
-			sht.putStock(indi.getStock());
-		});
 
-		edit.add(selectStock);
-		edit.add(mntmImport);
+		edit.add(editStockArchive);
 
 		menuBar.add(mnFile);
 		menuBar.add(edit);
